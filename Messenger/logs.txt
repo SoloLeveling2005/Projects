@@ -1,0 +1,29 @@
+python -m venv venv
+
+call venv/Scripts/activate.bat
+
+pip install Django
+
+python.exe -m pip install --upgrade pip
+
+django-admin startproject django_settings .
+
+django-admin startapp twitter_app
+
+
+-- Создал можель базы данных
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+-- Vue
+
+node -v
+
+npm -v
+
+npm install -g @vue/cli
+
+vue create frontend
+
