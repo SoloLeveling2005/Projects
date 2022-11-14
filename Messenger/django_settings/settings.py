@@ -134,11 +134,11 @@ STATIC_URL = 'static/'
 if DEBUG:
     STATICFILES_DIRS = [
         # Path(BASE_DIR / 'static'),
-        Path(BASE_DIR / 'frontend/assets'),
+        Path(BASE_DIR / 'frontend/src/assets'),
     ]
 else:
     STATICFILES_DIRS = [
-        Path(BASE_DIR / 'frontend/assets'),
+        Path(BASE_DIR / 'frontend/src/assets'),
     ]
 
 # Default primary key field type
