@@ -5,62 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fadf72c4-9272-4c97-8c87-ec0cca2979ee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/public/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/css/home/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/css/log_auth/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/bookmark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/explore.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/heart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/home.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/list.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/messages.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/more.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/notification.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/home/profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/img/log_auth/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/js/home/imports.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/js/home/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/js/home/pre-launch_scripts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/js/home/vue.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/js/log_auth/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_settings/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/css/home/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/css/log_auth/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/bookmark.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/close.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/explore.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/heart.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/home.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/list.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/messages.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/more.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/notification.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/home/profile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/img/log_auth/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/js/home/imports.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/js/home/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/js/home/pre-launch_scripts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/js/home/vue.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/assets/js/log_auth/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/pages/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend(1)/pages/log_auth.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/migrations/0002_delete_users.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/migrations/0003_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/migrations/0004_alter_users_options_alter_users_user_nickname.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/migrations/0005_users_unique_user_code.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/migrations/0006_tweets_alter_users_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/migrations/0007_tweets_text_tweet.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/migrations/0008_alter_tweets_id_alter_users_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/migrations/0009_rename_unique_user_code_users_user_id_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_app/frontend/public/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/frontend/public/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_app/frontend/public/log_auth.html" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/frontend/public/log_auth.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_app/frontend/src/assets/js/home/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/js/home/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_app/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/frontend/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,20 +37,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "S:/Programmer/Projects/Messenger/twitter_app/frontend/public",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;S:/Programmer/Projects/Messenger/twitter_app/frontend/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="S:\Programmer\Projects\Messenger\twitter_app\frontend\public" />
@@ -144,6 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1668440850242</updated>
       <workItem from="1668440854410" duration="4313000" />
+      <workItem from="1668476719513" duration="4951000" />
     </task>
     <servers />
   </component>

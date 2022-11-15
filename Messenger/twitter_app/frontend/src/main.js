@@ -1,20 +1,34 @@
-const app = new Vue({
+new Vue({
     delimiters: ["[[", "]]"],
     el:"#tweets",
-    data() {
-      return { info:{} }
+    data: {
+            info: []
     },
     methods: {
         mounted1() {
-           axios.get("get_info_new_tweet/")
-            .then((response) => response.json().then((data) => this.info = response.data['context']))
-            .catch(error => {
-              this.errorMessage = error.message;
-              console.error("There was an error!", error);
-            });
-           console.log(this.info )
-            return true
+        return axios
+          .get('/get_info_tweet/')
+          .then((response) => {this.info = response.data['context']; console.log(this.info)}).catch(error => console.log(error));
+
         }
+        // mounted1() {
+        //     axios
+        //   .get('/get_info_tweet/')
+        //   .then(response => (this.info = response));
+        //     console.log(this.info)
+           // axios.get("get_info_new_tweet/")
+           //  // .then((response) => response.json().then((data) => this.info = response.data['context']))
+           //  //     .then(response => (this.info = response.data['context']))
+           //  //    .then((res) => res.json().then((data) => (this.info = data['context'])))
+           //     .then(response => (this.info = response.data['context']))
+           //  .catch(error => {
+           //    this.errorMessage = error.message;
+           //    console.error("There was an error!", error);
+           //  })
+           // console.log(this.info )
+           //  return true
+        // },
+
         //
         //     fetch("get_info_new_tweet/", {
         //         method: "GET",
@@ -30,15 +44,29 @@ const app = new Vue({
         //         console.log(this.info)
         // });}
     },
+    created() {
+            return axios
+          .get('/get_info_tweet/')
+          .then((response) => {this.info = response.data['context']; console.log(this.info)}).catch(error => console.log(error));
+
+        },
     mounted() {
-        axios.get("get_info_new_tweet/")
-            .then((response) => response.json().then((data) => this.info = response.data['context']))
-            .catch(error => {
-                this.errorMessage = error.message;
-                console.error("There was an error!", error);
-            })
-        console.log(this.info )
-        return true
+        return axios
+          .get('/get_info_tweet/')
+          .then((response) => {this.info = response.data['context']; console.log(this.info)}).catch(error => console.log(error));
+
+    }
+    // mounted() {
+    //     axios.get("get_info_new_tweet/")
+    //         // .then((response) => response.json().then((data) => this.info = response.data['context']))
+    //         // .then((res) => res.json().then((data) => (this.info = data['context'])))
+    //         .then(response => (this.info = response.data['context']))
+    //         .catch(error => {
+    //             this.errorMessage = error.message;
+    //             console.error("There was an error!", error);
+    //         })
+    //     console.log(this.info )
+    //     return true
         //
         //   fetch("get_info_new_tweet/", {
         //       method: "GET",
@@ -53,8 +81,8 @@ const app = new Vue({
         //       }
         //       console.log(this.info)
         // });}
-    }})
-app.mounted1()
+    })
+// app.mounted1()
 // const vm = app
 
 

@@ -88,15 +88,17 @@
                     </form>
                 </div>
                 <div class="tweets" id="tweets">
+<!--                    [[info]]-->
                     <div>
-                        <div v-for="task in info">
-                            <Tweets
-                                url_close_img="{% static 'src/assets/img/home/close.png' %}"
-                                url_like_img="{% static 'src/assets/img/home/heart.png' %}"
-                                v-bind:author_nickname="task.author_nickname"
-                                v-bind:text_tweet="task.text_tweet"
-                                v-bind:likes=task.likes
-                                ></Tweets>
+                        <div v-for="task in info" :key="task['id']">
+                            [[task]]
+<!--                            <Tweets-->
+<!--                                url_close_img="{% static 'src/assets/img/home/close.png' %}"-->
+<!--                                url_like_img="{% static 'src/assets/img/home/heart.png' %}"-->
+<!--                                v-bind:author_nickname="task.author_nickname"-->
+<!--                                v-bind:text_tweet="task.text_tweet"-->
+<!--                                v-bind:likes=task.likes-->
+<!--                                ></Tweets>-->
                             
                         </div>
                     </div>

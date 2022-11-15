@@ -39,10 +39,10 @@ function new_tweet() {
         },
         body: JSON.stringify({id_tweet: tweet_id,author_id:author_id,tweet_text:tweet_text})
       })
-      .then(response => response.json())
-      .then(data => {
-        
-    });
+      // .then(response => response.json())
+      // .then(data => {
+      //
+    // });
     console.log("Запрос прошел успешно");
     document.querySelector(".tweet_text").value = ""
 }
