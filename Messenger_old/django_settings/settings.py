@@ -57,7 +57,7 @@ ROOT_URLCONF = 'django_settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "twitter_app/frontend"],
+        'DIRS': [BASE_DIR / "frontend"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,14 +133,14 @@ USE_TZ = True
 STATIC_URL = 'static/'
 if DEBUG:
     STATICFILES_DIRS = [
-        Path(BASE_DIR / 'static'),
+        # Path(BASE_DIR / 'static'),
         # Path(BASE_DIR / 'frontend/src/assets'),
-        Path(BASE_DIR / 'twitter_app/frontend'),
+        Path(BASE_DIR / 'frontend/src/'),
     ]
 else:
     STATICFILES_DIRS = [
         # Path(BASE_DIR / 'frontend/src/assets'),
-        Path(BASE_DIR / 'twitter_app/frontend'),
+        Path(BASE_DIR / 'frontend/src/'),
     ]
 
 # Default primary key field type

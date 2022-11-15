@@ -33,17 +33,17 @@ def new_tweet(request: HttpRequest, code: int) -> Union[HttpResponseBadRequest,J
         return HttpResponseBadRequest('Invalid request')
 
 def get_info_new_tweet(request: HttpRequest, code: int):
-    # is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-    #
-    # if is_ajax:
+    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+    if is_ajax:
         if request.method == 'GET':
             print(Tweets.objects.all())
             todos = list(Tweets.objects.all().values())
             print(todos)
             return JsonResponse({'context': todos})
         return JsonResponse({'status': 'Invalid request'}, status=400)
-    # else:
-    #     return HttpResponseBadRequest('Invalid request')
+    else:
+        return HttpResponseBadRequest('Invalid request')
 
 def like_tweet(request: HttpRequest) -> JsonResponse:
     context = {}
