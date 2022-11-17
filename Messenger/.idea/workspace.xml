@@ -7,8 +7,6 @@
     <list default="true" id="fadf72c4-9272-4c97-8c87-ec0cca2979ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/frontend/public/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/frontend/public/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/frontend/src/assets/js/home/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/frontend/src/assets/js/home/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/frontend/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/views.py" afterDir="false" />
     </list>
@@ -96,7 +94,7 @@
       <workItem from="1668476719513" duration="4951000" />
       <workItem from="1668511815098" duration="311000" />
       <workItem from="1668562569041" duration="1502000" />
-      <workItem from="1668650767146" duration="1349000" />
+      <workItem from="1668650767146" duration="3902000" />
     </task>
     <servers />
   </component>

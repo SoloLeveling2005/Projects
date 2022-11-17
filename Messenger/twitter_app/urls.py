@@ -8,7 +8,8 @@ app_name = 'twitter_app'
 urlpatterns = [
     # Главная страница с регистрацией и авторизацией
     path('', views.log_auth, name='log_auth'),
-    path('home/<int:code>/new_tweet/', views.new_tweet, name='new_tweet'),
+    # path('home/<int:code>/new_tweet/', views.new_tweet, name='new_tweet'),
+    path('new_tweet/', views.new_tweet, name='new_tweet'),
     path('home/<int:code>/get_info_new_tweet/', views.get_info_new_tweet, name='get_info_new_tweet'),
     path('home/<int:id_tweet>/like_tweet/', views.like_tweet, name='like_tweet'),
     path('get_info_tweet/', views.get_info_tweet, name='get_info_tweet'),

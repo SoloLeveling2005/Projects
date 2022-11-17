@@ -82,9 +82,11 @@
             <section class="content">
                 <div class="new_tweet">
                     <div class="profile">У</div>
-                    <form action="" class="new_tweet_in_content_block">
+                    <form action="{% url 'twitter_app:new_tweet' %}" method="POST" class="new_tweet_in_content_block">
+                        {% csrf_token %}
                         <textarea class="tweet_text" name="tweet_text" id="" maxlength="200" contenteditable="true" placeholder="Whats happaning?"></textarea>
-                        <input type="button" value="Tweet" onclick="new_tweet()">
+                        <input type="hidden" value="{{user_id}}" name="author_id">
+                        <input type="submit" value="Tweet" onclick="">
                     </form>
                 </div>
                 <div class="tweets" id="tweets">
