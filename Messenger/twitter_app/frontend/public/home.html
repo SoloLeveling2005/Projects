@@ -19,20 +19,22 @@
                     </form>
                 </div>
                 <div class="tweets" id="tweets">
-                    <div>
-                        <div v-for="task in info" :key="task['id']">
-                            <Tweets
-                                url_close_img="{% static 'src/assets/img/home/close.png' %}"
-                                url_like_img="{% static 'src/assets/img/home/heart.png' %}"
-                                v-bind:tweet_id=Number(task.id_tweet)
-                                v-bind:author_nickname="task.author_nickname"
-                                v-bind:text_tweet="task.text_tweet"
-                                v-bind:likes=task.likes
-                                ></Tweets>
-                            
+                    <!--{{content}}-->
+                    {% for tweet in content %}
+                    <div class="tweet">
+                        <div class="logo">{{tweet.author_nickname.0}}</div>
+                            <div id="tweet-content" class="tweet-content">
+                            <div class="tweet-actions-top">
+                                <a href="" class="tweet-author-nickname">{{tweet.author_nickname}}</a>
+                                <a href="{% url 'twitter_app:delete_tweet' tweet.id_tweet %}"><img src="{% static 'src/assets/img/home/close.png' %}" alt="" class="close-tweet"></a>
+                            </div>
+                            <p class="tweet-text">{{tweet.text_tweet}}</p>
+                            <div class="tweet-actions-bottom">
+                                <a href="{% url 'twitter_app:like_tweet' tweet.id_tweet %}"><img src="{% static 'src/assets/img/home/heart.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                            </div>
                         </div>
                     </div>
-                    
+                    {% endfor %}
                 </div>
             </section>
         </section>
