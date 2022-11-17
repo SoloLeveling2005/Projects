@@ -47,5 +47,3 @@ function new_tweet() {
     document.querySelector(".tweet_text").value = ""
 }
 
-
-

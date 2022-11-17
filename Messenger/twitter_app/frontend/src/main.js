@@ -11,23 +11,6 @@ new Vue({
           .then((response) => {this.info = response.data['context']; console.log(this.info)}).catch(error => console.log(error));
 
         }
-        // mounted1() {
-        //     axios
-        //   .get('/get_info_tweet/')
-        //   .then(response => (this.info = response));
-        //     console.log(this.info)
-           // axios.get("get_info_new_tweet/")
-           //  // .then((response) => response.json().then((data) => this.info = response.data['context']))
-           //  //     .then(response => (this.info = response.data['context']))
-           //  //    .then((res) => res.json().then((data) => (this.info = data['context'])))
-           //     .then(response => (this.info = response.data['context']))
-           //  .catch(error => {
-           //    this.errorMessage = error.message;
-           //    console.error("There was an error!", error);
-           //  })
-           // console.log(this.info )
-           //  return true
-        // },
 
         //
         //     fetch("get_info_new_tweet/", {
@@ -44,43 +27,12 @@ new Vue({
         //         console.log(this.info)
         // });}
     },
-    created() {
-            return axios
-          .get('/get_info_tweet/')
-          .then((response) => {this.info = response.data['context']; console.log(this.info)}).catch(error => console.log(error));
-
-        },
     mounted() {
         return axios
           .get('/get_info_tweet/')
           .then((response) => {this.info = response.data['context']; console.log(this.info)}).catch(error => console.log(error));
 
     }
-    // mounted() {
-    //     axios.get("get_info_new_tweet/")
-    //         // .then((response) => response.json().then((data) => this.info = response.data['context']))
-    //         // .then((res) => res.json().then((data) => (this.info = data['context'])))
-    //         .then(response => (this.info = response.data['context']))
-    //         .catch(error => {
-    //             this.errorMessage = error.message;
-    //             console.error("There was an error!", error);
-    //         })
-    //     console.log(this.info )
-    //     return true
-        //
-        //   fetch("get_info_new_tweet/", {
-        //       method: "GET",
-        //       headers: {
-        //           "X-Requested-With": "XMLHttpRequest",
-        //       }
-        //   }).then(response => response.json()).then(data => {
-        //       this.info = data['context']
-        //       for (let i of data['context']){
-        //           console.log(i)
-        //           // this.info = i
-        //       }
-        //       console.log(this.info)
-        // });}
     })
 // app.mounted1()
 // const vm = app
@@ -89,6 +41,10 @@ new Vue({
 
 Vue.component('Tweets', {
     props: {
+        tweet_id: {
+            type:Number,
+            required: true
+        },
         url_close_img: {
             type: String,
             // default: 100,
@@ -117,7 +73,13 @@ Vue.component('Tweets', {
             info2:1
         }
     },
-
+    methods: {
+      like_tweet_met(tweet_id) {
+          return axios
+          .get(`/home/${tweet_id}/like_tweet/`)
+          .then((response) => {this.info = response.data['context']; console.log(this.info); this.likes += 1}).catch(error => console.log(error));
+      }
+    },
     template:
     `
         <div class="tweet">
@@ -129,7 +91,7 @@ Vue.component('Tweets', {
                 </div>
                 <p class="tweet-text">{{text_tweet}}</p>
                 <div class="tweet-actions-bottom">
-                    <img :src="url_like_img" alt=""><span class="tweet-likes">{{likes}}</span>
+                    <img :src="url_like_img" alt="" @click="like_tweet_met(tweet_id)"><span class="tweet-likes" >{{likes}}</span>
                 </div>                         
             </div>
         </div>

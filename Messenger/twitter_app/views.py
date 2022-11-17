@@ -52,11 +52,23 @@ def get_info_tweet(request: HttpRequest):
         return JsonResponse({'context': todos})
     return JsonResponse({'status': 'Invalid request'}, status=400)
 
-def like_tweet(request: HttpRequest) -> JsonResponse:
-    context = {}
-    # return HttpResponse(content=b"<h1>Hello World</h1>")
-    # return JsonResponse(data={"response": 'res'}, safe=True)
-    return render(request, 'django_twitter_app/home.html', context=context)
+def like_tweet(request: HttpRequest, id_tweet:int) -> JsonResponse:
+    if request.method == 'GET':
+        post = models.Tweets.objects.get(id_tweet=id_tweet)
+        post.likes = models.Tweets.objects.get(id_tweet=id_tweet).likes + 1
+        post.save()
+        return JsonResponse({'context': True})
+    return JsonResponse({'status': 'Invalid request'}, status=400)
+    # return render(request, 'django_twitter_app/home.html', context=context)
+def dislike_tweet(request: HttpRequest, id_tweet:int) -> JsonResponse:
+    if request.method == 'GET':
+        author_id = models.Tweets.objects.get(id=id_tweet).author_id
+        post = models.Tweets.objects.get(id=id_tweet)
+        post.likes = models.Tweets.objects.get(id=id_tweet).likes - 1
+        post.save()
+        return redirect(reverse('twitter_app:home', args=(author_id,)))
+    return JsonResponse({'status': 'Invalid request'}, status=400)
+    # return render(request, 'django_twitter_app/home.html', context=context)
 
 def delete_tweet(request: HttpRequest) -> JsonResponse:
     context = {}
