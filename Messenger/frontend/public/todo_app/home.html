@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.g    static.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body class="dark">
+    <div class="error">Вы не заполнили все поля</div>
+    <section class="main" id="main">
+        <h2 class="title-page">My Todos</h2>
+        <div class="new-task-block">
+            <div class="create-title-task">
+                <p class="p-title">Name</p>
+                <input required  class="input-name" type="text" placeholder="Name">
+            </div>
+            <div class="create-description-task">
+                <p class="p-description">Description</p>
+                <input required  type="text" placeholder="description" class="input-description">
+            </div>
+            <div class="create-task-block-button" id="create-task-block-button">
+                <button class="button-create-task" @click="num_task">Add Todo</button>
+            </div>
+        </div>
+        <div class="message-for-user" id="message-for-user">
+            <h3>Вы уверены что хотите удалить данную заметку?</h3>
+            <span><button @click="cancel">Cancel</button><button @click="confirm">Confirm</button></span>
+        </div>
+        <div class="tasks-section" id="tasks-section">
+            <template v-if="done == 'in_progress'">
+                <div class="title-description">
+                    <p class="title-text in_progress-title">{{title}}</p>
+                    <p class="description-text in_progress-description">{{description}}</p>
+                </div>
+                <div class="buttons">
+                    <button v-if="done == 'in_progress'" class="button-complate" @click="perform_task(id)">Complate</button>
+                    <button class="button-delete" @click="delete_task(id)">Delete</button>
+                </div>
+            </template>
+            <template v-else-if="done == 'ready'">
+                <div class="title-description">
+                    <p class="title-text ready">{{title}}</p>
+                    <p class="description-text ready">{{description}}</p>
+                </div>
+                <div class="buttons">
+                    <button v-if="done == 'in_progress'" class="button-complate" @click="perform_task(id)">Complate</button>
+                    <button class="button-delete" @click="delete_task(id)">Delete</button>
+                </div>
+            </template>
+
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

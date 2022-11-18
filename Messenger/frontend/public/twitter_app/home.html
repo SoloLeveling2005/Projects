@@ -1,11 +1,11 @@
-{% extends 'public/components/base.html' %}
+{% extends 'public/twitter_app/components/base.html' %}
 {% load static %}
 {% block main %}
 
 
     <main>
-        {% include 'public/components/left-menu.html' %}
-        {% include 'public/components/top-menu.html' %}
+        {% include 'public/twitter_app/components/left-menu.html' %}
+        {% include 'public/twitter_app/components/top-menu.html' %}
         <section class="main">
             
             <section class="content">
@@ -26,11 +26,11 @@
                             <div id="tweet-content" class="tweet-content">
                             <div class="tweet-actions-top">
                                 <a href="" class="tweet-author-nickname">{{tweet.author_nickname}}</a>
-                                <a href="{% url 'twitter_app:delete_tweet' tweet.id_tweet %}"><img src="{% static 'src/assets/img/home/close.png' %}" alt="" class="close-tweet"></a>
+                                <a href="{% url 'twitter_app:delete_tweet' tweet.id_tweet %}"><img src="{% static 'src/twitter_app/assets/img/home/close.png' %}" alt="" class="close-tweet"></a>
                             </div>
                             <p class="tweet-text">{{tweet.text_tweet}}</p>
                             <div class="tweet-actions-bottom">
-                                <a href="{% url 'twitter_app:like_tweet' tweet.id_tweet %}"><img src="{% static 'src/assets/img/home/heart.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                <a href="{% url 'twitter_app:like_tweet' tweet.id_tweet %}"><img src="{% static 'src/twitter_app/assets/img/home/heart.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
                             </div>
                         </div>
                     </div>

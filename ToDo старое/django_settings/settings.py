@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'twitter_app',
-    'todo_app',
+    'todo',
 ]
 
 MIDDLEWARE = [
@@ -134,14 +133,14 @@ USE_TZ = True
 STATIC_URL = 'static/'
 if DEBUG:
     STATICFILES_DIRS = [
-        Path(BASE_DIR / 'static'),
+        # Path(BASE_DIR / 'static'),
         # Path(BASE_DIR / 'frontend/src/assets'),
-        Path(BASE_DIR / 'frontend'),
+        Path(BASE_DIR / 'frontend/src/assets'),
     ]
 else:
     STATICFILES_DIRS = [
         # Path(BASE_DIR / 'frontend/src/assets'),
-        Path(BASE_DIR / 'frontend'),
+        Path(BASE_DIR / 'frontend/src/assets'),
     ]
 
 # Default primary key field type

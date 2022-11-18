@@ -89,7 +89,7 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
         context = {}
         user_id = request.COOKIES.get('user_id')
         if user_id is None:
-            return render(request, 'public/log_auth.html', context)
+            return render(request, 'public/twitter_app/log_auth.html', context)
         else:
             return redirect(reverse('twitter_app:home', args=(user_id,)))
     elif request.method == "POST":
@@ -106,7 +106,7 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
             except:
                 context = {"error": "Такого пользователя не существует"}
                 context = {'data': json.dumps(context)}
-                return render(request, 'public/log_auth.html', context=context)
+                return render(request, 'public/twitter_app/log_auth.html', context=context)
 
             home_page = redirect(reverse('twitter_app:home', args=(post_name.user_id,)))
 
@@ -122,7 +122,7 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
             if password != repeat_password:
                 context = {"error": "Пароли не совпадают"}
                 context = {'data': json.dumps(context)}
-                return render(request, 'public/log_auth.html', context=context)
+                return render(request, 'public/twitter_app/log_auth.html', context=context)
 
             if nickname or password:
                 try:
@@ -130,7 +130,7 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
                     context = {"error": "Пользователь с таким никнеймом уже существует"}
                     context = {'data': json.dumps(context)}
                     print("Пользователь с таким никнеймом уже существует")
-                    return render(request, 'public/log_auth.html', context=context)
+                    return render(request, 'public/twitter_app/log_auth.html', context=context)
                 except:
                     pass
 
@@ -149,7 +149,7 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
                 context = {"error": "поля не заполнены!"}
                 context = {'data': json.dumps(context)}
                 print("поля не заполнены!")
-                return render(request, 'public/log_auth.html', context=context)
+                return render(request, 'public/twitter_app/log_auth.html', context=context)
 
 
 def home(request: HttpRequest, code: int) -> HttpResponse:
@@ -161,6 +161,6 @@ def home(request: HttpRequest, code: int) -> HttpResponse:
             if int(user_id) == int(code):
                 todos = list(Tweets.objects.all().values())
                 print(todos)
-                return render(request, 'public/home.html', context={'user_id': user_id, 'content': todos})
+                return render(request, 'public/twitter_app/home.html', context={'user_id': user_id, 'content': todos})
             else:
                 return redirect(reverse('twitter_app:home', args=(user_id,)))
