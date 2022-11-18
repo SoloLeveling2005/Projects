@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fadf72c4-9272-4c97-8c87-ec0cca2979ee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_app/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/frontend/src/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +95,7 @@
       <workItem from="1668562569041" duration="1502000" />
       <workItem from="1668650767146" duration="6043000" />
       <workItem from="1668689879316" duration="2376000" />
+      <workItem from="1668769244041" duration="133000" />
     </task>
     <servers />
   </component>
