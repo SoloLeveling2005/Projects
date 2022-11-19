@@ -4,43 +4,6 @@ from django.db import models
 
 
 
-class Users(models.Model):  # TODO таблица в базе данных
-    id = models.AutoField(primary_key=True)
-    list_display_links = None
-    # list_editable = ['nickname', 'password']
-    user_nickname = models.CharField(  # TODO поле в этой таблице
-        verbose_name="user_nickname",
-        default="",
-        editable=True,
-        blank=True,
-
-        max_length=300
-    )
-    user_password = models.CharField(
-        verbose_name="user_password",
-        default="",
-        editable=True,
-        blank=True,
-
-        max_length=300  # TODO свойство(параметр) этого поля
-    )
-    user_id = models.IntegerField(
-        verbose_name="unique_user_code",
-        default=0,
-        editable=True,
-        blank=True,
-    )
-
-    class Meta:
-        app_label = 'twitter_app'
-        ordering = ('id',)
-        verbose_name = 'Аккаунт'
-        verbose_name_plural = 'Аккаунты'
-        # db_table
-
-    # def __str__(self):
-    #     return f"Todo: {self.title} ({self.user}) [{self.id}]"
-
 
 
 class Tweets(models.Model):  # TODO таблица в базе данных

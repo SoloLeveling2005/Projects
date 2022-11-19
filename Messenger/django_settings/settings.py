@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'twitter_app',
     'todo_app',
+    'log_auth',
 ]
 
 MIDDLEWARE = [

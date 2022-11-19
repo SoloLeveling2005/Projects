@@ -7,7 +7,8 @@ from django.conf.urls.static import static
 app_name = 'twitter_app'
 urlpatterns = [
     # Главная страница с регистрацией и авторизацией
-    path('', views.log_auth, name='log_auth'),
+    path('', views.home),
+    path('home/', views.home),
     # path('home/<int:code>/new_tweet/', views.new_tweet, name='new_tweet'),
     path('new_tweet/', views.new_tweet, name='new_tweet'),
     path('home/<int:code>/get_info_new_tweet/', views.get_info_new_tweet, name='get_info_new_tweet'),
