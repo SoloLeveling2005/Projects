@@ -16,7 +16,10 @@ main {
     height: 100%;
 }
 
-
+a {
+    text-decoration: none;
+    color: black;
+}
 
 
 .left-menu {
@@ -38,6 +41,9 @@ main {
     margin-bottom: 10px;
     margin-top: 5px;
     width: 100%;
+
+    -moz-user-select: none;
+    user-select: none;
 }
 .menu-elem .menu-elem-active {
     background: white;
@@ -45,7 +51,11 @@ main {
     -webkit-transition: background .5s;
     -o-transition: background .5s;
     -ms-transition: background .5s;
-    transition: background .5s;  
+    transition: background .5s;
+
+    -moz-user-select: none;
+    user-select: none;
+
 }
 .menu-elem:hover .menu-elem-active {
     background: rgb(199, 199, 199);
@@ -325,4 +335,12 @@ main {
 .tweet-content .tweet-actions-bottom .tweet-likes {
     font-size: 14px;
     margin-left:5px ;
+}
+
+.delete_a {
+    float: right;
+}
+
+.like_a {
+    margin-right: 5px;
 }

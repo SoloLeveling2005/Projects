@@ -1,9 +1,7 @@
 from django.db import models
 
+
 # Create your models here.
-
-
-
 
 
 class Tweets(models.Model):  # TODO таблица в базе данных
@@ -44,6 +42,19 @@ class Tweets(models.Model):  # TODO таблица в базе данных
         editable=True,
         blank=True,
     )
+    comments = models.IntegerField(
+        verbose_name="comments",
+        default=0,
+        editable=True,
+        blank=True,
+    )
+    parent_tweet_id = models.IntegerField(
+        verbose_name="parent_tweet_id",
+        default=None,
+        editable=True,
+        blank=True,
+        null=True
+    )
 
     class Meta:
         app_label = 'twitter_app'
@@ -77,4 +88,30 @@ class Rating(models.Model):  # TODO таблица в базе данных
         ordering = ('id',)
         verbose_name = 'Рейтинг твита'
         verbose_name_plural = 'Рейтинг твитов'
+        # db_table
+
+
+class Comments(models.Model):  # TODO таблица в базе данных
+    id = models.AutoField(primary_key=True)
+    list_display_links = None
+
+    id_tweet = models.IntegerField(  # TODO поле в этой таблице
+        verbose_name="id_tweet",
+        default=0,
+        editable=True,
+        blank=True,
+    )
+
+    user_id = models.IntegerField(  # TODO поле в этой таблице
+        verbose_name="user_id",
+        default=0,
+        editable=True,
+        blank=True,
+    )
+
+    class Meta:
+        app_label = 'twitter_app'
+        ordering = ('id',)
+        verbose_name = 'Комментарии твита'
+        verbose_name_plural = 'Комментарии твитов'
         # db_table

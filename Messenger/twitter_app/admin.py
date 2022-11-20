@@ -18,6 +18,8 @@ class Tweets(admin.ModelAdmin):
         'author_nickname',
         'text_tweet',
         'likes',
+        'comments',
+        'parent_tweet_id',
     )
     list_display_links = (  # для ссылка (для перехода внутрь)
         'id',
@@ -25,6 +27,8 @@ class Tweets(admin.ModelAdmin):
         'author_nickname',
         'text_tweet',
         'likes',
+        'comments',
+        'parent_tweet_id',
     )
     list_editable = (  # поле, доступное для редактирования в общем списке
 
@@ -35,6 +39,8 @@ class Tweets(admin.ModelAdmin):
         'author_nickname',
         'text_tweet',
         'likes',
+        'comments',
+        'parent_tweet_id',
     )
     search_fields = (  # поля для поиска (ввод поиска в одном месте)
         'id',
@@ -42,6 +48,8 @@ class Tweets(admin.ModelAdmin):
         'author_nickname',
         'text_tweet',
         'likes',
+        'comments',
+        'parent_tweet_id',
     )
     fieldsets = (
         # ("Id поста", {"fields": ('id_tweet',)}),
@@ -49,6 +57,8 @@ class Tweets(admin.ModelAdmin):
         ("Никнейм автора", {"fields": ('author_nickname',)}),
         ("Текст", {"fields": ('text_tweet',)}),
         ("Кол-во лайков", {"fields": ('likes',)}),
+        ("Кол-во комментариев", {"fields": ('comments',)}),
+        ("Родитель твита", {"fields": ('parent_tweet_id',)}),
     )
 
 class Rating(admin.ModelAdmin):
@@ -85,5 +95,41 @@ class Rating(admin.ModelAdmin):
     )
 
 
+
+class Comments(admin.ModelAdmin):
+    """
+        Settings admin page for Todo
+    """
+    list_display = (  # отображение
+        'id',
+        'id_tweet',
+        'user_id',
+    )
+    list_display_links = (  # для ссылка (для перехода внутрь)
+        'id',
+        'id_tweet',
+        'user_id',
+    )
+    list_editable = (  # поле, доступное для редактирования в общем списке
+
+    )
+    list_filter = (  # поля для фильтрации
+        'id',
+        'id_tweet',
+        'user_id',
+    )
+    search_fields = (  # поля для поиска (ввод поиска в одном месте)
+        'id',
+        'id_tweet',
+        'user_id',
+    )
+    fieldsets = (
+        # ("Id поста", {"fields": ('id_tweet',)}),
+        ("ID твита", {"fields": ('id_tweet',)}),
+        ("ID автора", {"fields": ('user_id',)}),
+    )
+
+
 admin.site.register(django_models.Tweets, Tweets)  # complex register model
 admin.site.register(django_models.Rating, Rating)  # complex register model
+admin.site.register(django_models.Comments, Comments)  # complex register model
