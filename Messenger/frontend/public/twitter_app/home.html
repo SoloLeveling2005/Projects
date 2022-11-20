@@ -10,7 +10,7 @@
             
             <section class="content">
                 <div class="new_tweet">
-                    <div class="profile">У</div>
+                    <div class="profile">{{ user_nickname.0 }}</div>
                     <form action="{% url 'twitter_app:new_tweet' %}" method="POST" class="new_tweet_in_content_block">
                         {% csrf_token %}
                         <textarea class="tweet_text" name="tweet_text" id="" maxlength="200" contenteditable="true" placeholder="Whats happaning?"></textarea>
@@ -26,11 +26,17 @@
                             <div id="tweet-content" class="tweet-content">
                             <div class="tweet-actions-top">
                                 <a href="" class="tweet-author-nickname">{{tweet.author_nickname}}</a>
-                                <a href="{% url 'twitter_app:delete_tweet' tweet.id_tweet %}"><img src="{% static 'src/twitter_app/assets/img/home/close.png' %}" alt="" class="close-tweet"></a>
+                                {% if tweet.author_id|add:"0" == user_id|add:"0" %} {# Добавил строку к данным чтобы они стали одинаковым типом (использовать с осторожностью) #}
+                                    <a href="{% url 'twitter_app:delete_tweet' user_id tweet.id %}"><img src="{% static 'src/twitter_app/assets/img/home/close.png' %}" alt="" class="close-tweet"></a>
+                                {% endif %}
                             </div>
                             <p class="tweet-text">{{tweet.text_tweet}}</p>
                             <div class="tweet-actions-bottom">
-                                <a href="{% url 'twitter_app:like_tweet' tweet.id_tweet %}"><img src="{% static 'src/twitter_app/assets/img/home/heart.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                {% if tweet.id in mass_likes_user %}
+                                    <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_id %}"><img src="{% static 'src/twitter_app/assets/img/home/heart.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                {% elif tweet.id %}
+                                    <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_id %}"><img src="{% static 'src/twitter_app/assets/img/home/heart.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

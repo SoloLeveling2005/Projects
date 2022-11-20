@@ -44,8 +44,8 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
             home_page = redirect(reverse('twitter_app:home', args=(post_name.id,)))
             home_page2 = redirect(reverse('todo_app:home', args=(post_name.id,)))
 
-            home_page.set_cookie('user_id', post_name.id, max_age=60 * 5)
-            home_page2.set_cookie('user_id', post_name.id, max_age=60 * 5)
+            home_page.set_cookie('user_id', post_name.id, max_age=60 * 10)
+            home_page2.set_cookie('user_id', post_name.id, max_age=60 * 10)
             return home_page
 
         elif 'input_nickname' in request.POST:
@@ -78,8 +78,8 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
                 new_user_id = Users.objects.get(user_nickname=nickname, user_password=password).id
                 home_page = redirect(reverse('twitter_app:home', args=(new_user_id,)))
                 home_page2 = redirect(reverse('todo_app:home', args=(new_user_id,)))
-                home_page.set_cookie('user_id', new_user_id, max_age=60 * 5)
-                home_page2.set_cookie('user_id', new_user_id, max_age=60 * 5)
+                home_page.set_cookie('user_id', new_user_id, max_age=60 * 10)
+                home_page2.set_cookie('user_id', new_user_id, max_age=60 * 10)
                 return home_page
             else:
                 context = {"error": "поля не заполнены!"}
