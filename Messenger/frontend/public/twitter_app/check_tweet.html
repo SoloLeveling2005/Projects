@@ -8,7 +8,7 @@
             <div class="parent-tweet">
                 <div class="top-element">
                     <div class="profile">{{ this_tweet.author_nickname.0 }}</div>
-                    <div class="title">{{ this_tweet.author_nickname }}</div>
+                    <div class="title" style="display: flex;">{{ this_tweet.author_nickname }}</div>
                     <div class="action-button"><img style="width: 15px;height: 15px;" src="{% static 'src/twitter_app/assets/img/home/more_2.png' %}" alt=""></div>
                 </div>
                 <div class="content">{{ this_tweet.text_tweet }}</div>
@@ -16,8 +16,9 @@
                     <div class="div"><img src="" alt=""></div>
                 </div>
                 <div class="new_tweet">
-                    <div class="profile">M</div>
+                    <div class="profile" style="display: flex;">{{user_data.user_nickname.0}}</div>
                     <form action="/twitter_app/new_tweet/" method="POST" class="new_tweet_in_content_block">
+                        {% csrf_token %}
                         <input type="hidden" name="csrfmiddlewaretoken" value="pU3kc9QnWzu34cFpEwz5HpXnTuKGHFA8DjFLMvXFdO3hFu7fz9hUqFLot2iVjSiK">
                         <textarea class="tweet_text" name="tweet_text" id="" maxlength="200" contenteditable="true" placeholder="Whats happaning?"></textarea>
                         <input type="hidden" value="1" name="author_id">
@@ -28,7 +29,7 @@
                 <div class="tweets">
                     {% for tweet in content %}
                         <div class="tweet">
-                                <div class="logo">{{tweet.author_nickname.0}}</div>
+                                <div class="logo">{{user_data.user_nickname.0}}</div>
                                 <div id="tweet-content" class="tweet-content">
                                     <div class="tweet-actions-top">
                                         <a href="" class="tweet-author-nickname">{{tweet.author_nickname}}</a>

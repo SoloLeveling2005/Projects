@@ -10,10 +10,12 @@ from django.views import View
 from random import randint
 import datetime
 
+from django.views.decorators.csrf import csrf_exempt
+
 from twitter_app.models import Tweets, Rating
 from log_auth.models import Users
 
-
+@csrf_exempt
 def new_tweet(request: HttpRequest) -> Union[HttpResponseBadRequest, JsonResponse]:
     if request.method == 'POST':
         # id_tweet = (str(datetime.datetime.now()).replace(' ', '').replace(':', '').replace('-', '').replace(
@@ -149,7 +151,10 @@ def check_tweet(request: HttpRequest, user_id: int, id_tweet: int):
                 print(mass_likes_user)
                 tweets = Tweets.objects.filter(parent_tweet_id=id_tweet)
                 user_data = Users.objects.get(id=user_id)
-                this_tweet = Tweets.objects.get(id=id_tweet)
+                try:
+                    this_tweet = Tweets.objects.get(id=id_tweet)
+                except:
+                    this_tweet = []
                 return render(request, 'public/twitter_app/check_tweet.html',
                               context={'content': tweets, 'user_data': user_data,
                                        'mass_likes_user': mass_likes_user, 'this_tweet': this_tweet})
