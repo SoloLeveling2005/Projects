@@ -1,28 +1,14 @@
 {% extends 'public/twitter_app/components/base.html' %}
 {% load static %}
 {% block main %}
-
-
     <main>
         {% include 'public/twitter_app/components/left-menu.html' %}
         {% include 'public/twitter_app/components/top-menu.html' %}
-        <section class="main home_page">
-            
-            <section class="content">
-                <div class="new_tweet">
-                    <div class="profile">{{ user_nickname.0 }}</div>
-                    <form action="{% url 'twitter_app:new_tweet' %}" method="POST" class="new_tweet_in_content_block">
-                        {% csrf_token %}
-                        <textarea class="tweet_text" name="tweet_text" id="" maxlength="200" contenteditable="true" placeholder="Whats happaning?"></textarea>
-                        <input type="hidden" value="{{user_id}}" name="author_id">
-<!--                        <input type="hidden" value="None" name="parent_tweet_id">-->
-                        <input type="submit" value="Tweet" onclick="">
-                    </form>
-                </div>
-                <div class="tweets" id="tweets">
-                    <!--{{content}}-->
-                    {% for tweet in content %}
 
+        <section class="main check_user_page">
+            {% include 'public/twitter_app/components/profile.html' %}
+            <div class="tweets">
+                {% for tweet in tweets %}
                     <div class="tweet">
                             <div class="logo">{{tweet.author_nickname.0}}</div>
                             <div id="tweet-content" class="tweet-content">
@@ -47,15 +33,82 @@
                                 </div>
                             </div>
                     </div>
-                    {% endfor %}
-                </div>
-            </section>
+                {% endfor %}
+            </div>
         </section>
     </main>
+    <script>
+        document.querySelector(".top-menu").innerHTML = `
+        <a href="{% url 'twitter_app:home' user_data.id %}" class="back_home"><img src="{% static 'src/twitter_app/assets/img/check_tweet/back.png' %}" alt=""></a>
+        <span>{{user_data.user_nickname}}</span>
+        `
+    </script>
+    <style>
+        .main {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .back_home {
+            padding: 7px;
+            width: 17px;
+            height: 17px;
+            border: 0;
+            border-radius: 90%;
+            display: flex;
+            margin-right: 40px;
+            transition: background .3s;
+        }
+        .back_home:hover {
+            background: rgb(199, 199, 199);
+        }
+        .back_home img {
+            width: 17px;
+            height: 17px;
+        }
 
 
 
-    <!-- <script type="module" src="{% static 'js/home/imports.js' %}"></script> -->
 
-    <!-- <script src="{% static 'js/home/vue.js' %}"></script> -->
+
+        .tweets {
+            width: calc(100% + 40px);
+            height: auto;
+            border-top: 1px solid #adadad;
+            margin-left: -20px;
+            margin-top: 5px;
+        }
+
+        .tweets .tweet {
+            /*width: 100%;*/
+            height: auto;
+            /* border-top: 1px solid rgba(0, 0, 0, 0.100); */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.100);
+            padding: 15px 19px;
+            background: white;
+            -moz-transition: background .4s;
+            -webkit-transition: background .4s;
+            -o-transition: background .4s;
+            -ms-transition: background .4s;
+            transition: background .4s;
+        }
+
+        .tweets .tweet:hover {
+            background: #f8f8f8;
+        }
+
+        .tweets .tweet-content {
+            width: 100%;
+        }
+
+
+
+        .tweets .tweet-content img {
+            width: 15px;
+            height: 15px;
+
+        }
+
+    </style>
+
+
 {% endblock %}

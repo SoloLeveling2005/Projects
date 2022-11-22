@@ -40,9 +40,9 @@
                                     <p class="tweet-text">{{tweet.text_tweet}}</p>
                                     <div class="tweet-actions-bottom">
                                         {% if tweet.id in mass_likes_user %}
-                                            <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_data.id %}"><img src="{% static 'src/twitter_app/assets/img/home/like_on.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                            <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_data.id parent_id_tweet=this_id_tweet parent_user_id=this_user_id%}"><img src="{% static 'src/twitter_app/assets/img/home/like_on.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
                                         {% elif tweet.id %}
-                                            <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_data.id %}"><img src="{% static 'src/twitter_app/assets/img/home/like_off.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                            <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_data.id parent_id_tweet=this_id_tweet parent_user_id=this_user_id%}"><img src="{% static 'src/twitter_app/assets/img/home/like_off.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
                                         {% endif %}
                                             <a style="margin-left: 20px;" href="{% url 'twitter_app:check_tweet' user_id=user_data.id  id_tweet=tweet.id %}"><img src="{% static 'src/twitter_app/assets/img/home/comment.png' %}" alt=""></a>
                                         <span class="tweet-likes">

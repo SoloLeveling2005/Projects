@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 from twitter_app.models import Tweets, Rating
 from log_auth.models import Users
 
+
 @csrf_exempt
 def new_tweet(request: HttpRequest) -> Union[HttpResponseBadRequest, JsonResponse]:
     if request.method == 'POST':
@@ -34,6 +35,7 @@ def new_tweet(request: HttpRequest) -> Union[HttpResponseBadRequest, JsonRespons
             post.save()
             Tweets.objects.create(author_id=author_id, author_nickname=author.user_nickname,
                                   text_tweet=tweet_text, likes=0, parent_tweet_id=parent_tweet_id)
+            return redirect(reverse('twitter_app:check_tweet', args=(author_id, parent_tweet_id,)))
         return redirect(reverse('twitter_app:home', args=(author_id,)))
         # return JsonResponse({'status': 'Todo added!'})
     return JsonResponse({'status': 'Invalid request'}, status=400)
@@ -57,20 +59,23 @@ def get_info_tweet(request: HttpRequest):
     return JsonResponse({'status': 'Invalid request'}, status=400)
 
 
-def like_tweet(request: HttpRequest, user_id: int, id_tweet: int):
+def like_tweet(request: HttpRequest, user_id: int, id_tweet: int, parent_id_tweet: int, parent_user_id: int):
     if request.method == 'GET':
         print("user_id", user_id)
         print("id_tweet", id_tweet)
         # print(Rating.objects.get(user_id=user_id))
         post = Tweets.objects.get(id=id_tweet)
         author_id = post.author_id
-
         try:
             print(Rating.objects.get(user_id=user_id, id_tweet=id_tweet))
             post.likes = Tweets.objects.get(id=id_tweet).likes - 1
             post.save()
             Rating.objects.get(user_id=user_id, id_tweet=id_tweet).delete()
-            return redirect(reverse('twitter_app:home', args=(author_id,)))
+            if parent_id_tweet == 0:
+                return redirect(reverse('twitter_app:home', args=(author_id,)))
+            else:
+                print("Вернулся")
+                return redirect(reverse('twitter_app:check_tweet', args=(parent_user_id, parent_id_tweet,)))
         except:
             Rating.objects.create(
                 id_tweet=id_tweet,
@@ -79,7 +84,10 @@ def like_tweet(request: HttpRequest, user_id: int, id_tweet: int):
 
             post.likes = Tweets.objects.get(id=id_tweet).likes + 1
             post.save()
-            return redirect(reverse('twitter_app:home', args=(author_id,)))
+            if parent_id_tweet == 0:
+                return redirect(reverse('twitter_app:home', args=(author_id,)))
+            else:
+                return redirect(reverse('twitter_app:check_tweet', args=(parent_user_id, parent_id_tweet,)))
     return JsonResponse({'status': 'Invalid request'}, status=400)
     # return render(request, 'django_twitter_app/home.html', context=context)
 
@@ -143,20 +151,35 @@ def check_tweet(request: HttpRequest, user_id: int, id_tweet: int):
         if cookie_user_id is None:
             return redirect(reverse('log_auth:log_auth', args=()))
         else:
-            if int(cookie_user_id) == int(user_id):
-                likes_user = Rating.objects.filter(user_id=user_id)
-                mass_likes_user = []
-                for like_user in likes_user:
-                    mass_likes_user.append(like_user.id_tweet)
-                print(mass_likes_user)
-                tweets = Tweets.objects.filter(parent_tweet_id=id_tweet)
-                user_data = Users.objects.get(id=user_id)
-                try:
-                    this_tweet = Tweets.objects.get(id=id_tweet)
-                except:
-                    this_tweet = []
-                return render(request, 'public/twitter_app/check_tweet.html',
-                              context={'content': tweets, 'user_data': user_data,
-                                       'mass_likes_user': mass_likes_user, 'this_tweet': this_tweet})
+
+            likes_user = Rating.objects.filter(user_id=cookie_user_id)
+            mass_likes_user = []
+            for like_user in likes_user:
+                mass_likes_user.append(like_user.id_tweet)
+
+            tweets = Tweets.objects.filter(parent_tweet_id=id_tweet)
+            user_data = Users.objects.get(id=cookie_user_id)
+            try:
+                this_tweet = Tweets.objects.get(id=id_tweet)
+            except:
+                this_tweet = []
+            return render(request, 'public/twitter_app/check_tweet.html',
+                          context={'content': tweets, 'user_data': user_data,
+                                   'mass_likes_user': mass_likes_user, 'this_tweet': this_tweet,
+                                   'this_id_tweet': id_tweet, 'this_user_id': cookie_user_id})
+
+
+def check_user(request: HttpRequest, user_id: int):
+    if request.method == "GET":
+        cookie_user_id = request.COOKIES.get('user_id')
+        if cookie_user_id is None:
+            return redirect(reverse('log_auth:log_auth', args=()))
+        else:
+            tweets = Tweets.objects.filter(author_id=user_id)
+            user_data = Users.objects.get(id=cookie_user_id)
+            if int(user_id) == int(cookie_user_id):
+                return render(request, 'public/twitter_app/check_user.html',
+                              context={'tweets': tweets, 'user_data': user_data, 'admin': 'true', 'user_id':user_id})
             else:
-                return redirect(reverse('twitter_app:home', args=(cookie_user_id,)))
+                return render(request, 'public/twitter_app/check_user.html',
+                              context={'tweets': tweets, 'user_data': user_data, 'admin': 'false', 'user_id':user_id})

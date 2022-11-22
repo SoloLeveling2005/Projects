@@ -24,6 +24,14 @@ class Users(models.Model):  # TODO таблица в базе данных
 
         max_length=300  # TODO свойство(параметр) этого поля
     )
+    user_profile_description = models.CharField(
+        verbose_name="user_profile_description",
+        default="",
+        editable=True,
+        blank=True,
+
+        max_length=300  # TODO свойство(параметр) этого поля
+    )
 
     class Meta:
         app_label = 'log_auth'
