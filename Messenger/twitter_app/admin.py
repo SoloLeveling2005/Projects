@@ -8,6 +8,73 @@ from twitter_app import models as django_models
 # admin.site.site_title = '333333333'  # default: "Django site admin"
 
 
+
+class Users(admin.ModelAdmin):
+    """
+    Settings admin page for Todo
+    """
+    list_display = (  # отображение
+        'id',
+        'user_name',
+        'user_nickname',
+        'user_password',
+        'user_profile_description',
+        'user_following',
+        'user_followers',
+        'user_tweet_quantity'
+    )
+    list_display_links = (  # для ссылка (для перехода внутрь)
+        'id',
+        'user_name',
+        'user_nickname',
+        'user_password',
+        'user_profile_description',
+        'user_following',
+        'user_followers',
+        'user_tweet_quantity'
+    )
+    list_editable = (  # поле, доступное для редактирования в общем списке
+
+    )
+    list_filter = (  # поля для фильтрации
+        'id',
+        'user_name',
+        'user_nickname',
+        'user_password',
+        'user_profile_description',
+        'user_following',
+        'user_followers',
+        'user_tweet_quantity'
+    )
+    search_fields = (  # поля для поиска (ввод поиска в одном месте)
+        'id',
+        'user_name',
+        'user_nickname',
+        'user_password',
+        'user_profile_description',
+        'user_following',
+        'user_followers',
+        'user_tweet_quantity'
+    )
+    fieldsets = (
+        # ("ID", {"fields": ('id',)}),
+        ("Имя", {"fields": ('user_name',)}),
+        ("Никнейм", {"fields": ('user_nickname',)}),
+        ("Пароль", {"fields": ('user_password',)}),
+        ("Описание профиля", {"fields": ('user_profile_description',)}),
+        ("Подписки", {"fields": ('user_following',)}),
+        ("Подписчики", {"fields": ('user_followers',)}),
+        ("Кол-во твитов", {"fields": ('user_tweet_quantity',)}),
+    )
+
+
+
+
+
+
+
+
+
 class Tweets(admin.ModelAdmin):
     """
         Settings admin page for Todo
@@ -129,7 +196,7 @@ class Comments(admin.ModelAdmin):
         ("ID автора", {"fields": ('user_id',)}),
     )
 
-
+admin.site.register(django_models.Users, Users)  # complex register model
 admin.site.register(django_models.Tweets, Tweets)  # complex register model
 admin.site.register(django_models.Rating, Rating)  # complex register model
 admin.site.register(django_models.Comments, Comments)  # complex register model

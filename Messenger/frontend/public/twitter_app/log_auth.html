@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Импортируем скрипты -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
     <script>
         let data = {{context.data}}
     </script>
@@ -24,6 +24,11 @@
         <h1>Добро пожаловать</h1>
         <form action="{% url 'log_auth:log_auth' %}" method="POST" class="login" id="login" enctype="multipart/form-data">
             {% csrf_token %}
+            <label for="input_name">
+                Введите имя <br>
+                <input type="text" placeholder="" id="input_name" name="input_name">
+            </label>
+            <br>
             <label for="input_nickname">
                 Введите никнейм <br>
                 <input type="text" placeholder="" id="input_nickname" name="input_nickname">

@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'twitter_app',
-    'todo_app',
-    'log_auth',
 ]
 
 MIDDLEWARE = [
