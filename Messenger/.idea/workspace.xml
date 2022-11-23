@@ -7,50 +7,7 @@
     <list default="true" id="fadf72c4-9272-4c97-8c87-ec0cca2979ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django_settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_settings/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_settings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_settings/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.browserslistrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.eslintrc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/babel.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/jsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/log_auth.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/log_auth.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/HelloWorld.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/css/home/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/home/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/css/log_auth/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/log_auth/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/check_tweet/back.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/check_tweet/back.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/bookmark.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/bookmark.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/close.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/close.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/comment.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/comment.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/explore.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/explore.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/home.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/home.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/like_off.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/like_off.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/like_on.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/like_on.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/list.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/list.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/messages.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/messages.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/more.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/more.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/more_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/more_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/notification.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/notification.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/home/profile.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/home/profile.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/img/log_auth/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/img/log_auth/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/js/home/imports.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/js/home/imports.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/js/home/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/js/home/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/js/home/pre-launch_scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/js/home/pre-launch_scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/js/home/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/js/home/vue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/js/log_auth/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/js/log_auth/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/twitter_app/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/vue.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/log_auth/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/log_auth/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/log_auth/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/log_auth/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/views.py" afterDir="false" />
     </list>
@@ -186,7 +143,7 @@
       <workItem from="1668998351705" duration="683000" />
       <workItem from="1669033889459" duration="8832000" />
       <workItem from="1669085658370" duration="1580000" />
-      <workItem from="1669211305415" duration="2779000" />
+      <workItem from="1669211305415" duration="4781000" />
     </task>
     <servers />
   </component>

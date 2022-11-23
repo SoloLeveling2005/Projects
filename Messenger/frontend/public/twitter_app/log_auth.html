@@ -22,7 +22,7 @@
     </div>
     <main>
         <h1>Добро пожаловать</h1>
-        <form action="{% url 'log_auth:log_auth' %}" method="POST" class="login" id="login" enctype="multipart/form-data">
+        <form action="{% url 'twitter_app:log_auth' %}" method="POST" class="login" id="login" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="input_name">
                 Введите имя <br>
@@ -47,7 +47,7 @@
             <br>
             <span class="look_auth_block">Авторизоваться</span> 
         </form>
-        <form action="{% url 'log_auth:log_auth' %}" method="POST" class="authorization" id="authorization" enctype="multipart/form-data">
+        <form action="{% url 'twitter_app:log_auth' %}" method="POST" class="authorization" id="authorization" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="input_nickname_auth">
                 Введите никнейм <br>

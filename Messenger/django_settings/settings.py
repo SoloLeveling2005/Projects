@@ -135,13 +135,16 @@ if DEBUG:
     STATICFILES_DIRS = [
         Path(BASE_DIR / 'static'),
         # Path(BASE_DIR / 'frontend/src/assets'),
-        Path(BASE_DIR / 'frontend'),
+        Path(BASE_DIR / 'frontend/src/assets'),
     ]
 else:
     STATICFILES_DIRS = [
         # Path(BASE_DIR / 'frontend/src/assets'),
-        Path(BASE_DIR / 'frontend'),
+        Path(BASE_DIR / 'frontend/src/assets'),
     ]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = Path(BASE_DIR, 'static/media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
