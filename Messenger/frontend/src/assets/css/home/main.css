@@ -12,17 +12,26 @@ body {
 }
 
 
+
+
+.hr {
+    width: 100%;
+    height: .5px;
+    /*margin-left: -15px;*/
+    background-color: rgba(0, 0, 0, 0.100);
+}
+
 .home-page {
-    width: 70%;
+    width: 80%;
     height: auto;
     min-height: 100vh;
     display: flex;
 }
 .main {
-    width: 40%;
+    width: 50%;
     height: auto;
     min-height: 100vh;
-    padding-top: 50px;
+    padding-top: 60px;
     border-left: 1px solid rgba(0, 0, 0, 0.100);
     border-right: 1px solid rgba(0, 0, 0, 0.100);
     position: relative;
@@ -30,26 +39,93 @@ body {
 
 .main .top-menu {
     position: fixed;
-    width: 100%;
+    z-index: 100;
+    width: inherit;
     top: 0;
     font-size: 18px;
     font-weight: 700;
-    height: 50px;
+    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.98);
+    padding-left: 15px;
+}
+.main .top-menu span {
+    width: max-content;
+    height: calc(100% - .5px);
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.100);
-    margin-left: -15px;
-    padding-left: 15px;
 }
 
 
 
 
 
+/* Новый твит */
+.main .new_tweet {
+    display: flex;
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.100);*/
+    padding-bottom: 10px;
+    padding: 15px 19px;
+    /*width: 100%;*/
+}
+.main .new_tweet .profile {
+    width: 55px;
+    height: 50px;
+    font-size: 24px;
+    color: white;
+    background-color: #455a64;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 90px;
+}
+.main .new_tweet .profile:hover {
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+    cursor: pointer;
 
+}
+.main .new_tweet textarea{
+    font-size: 18px;
+    padding: 20px;
+    font-size: 20px;
+    resize: none;
+    width: calc(100% - 80px);
+    height: min-content;
+    display: inline-table;
+    border: 0;
+    outline:none;
 
+}
+.main .new_tweet form {
+    width: 100%;
+}
+.main .new_tweet form input {
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: rgb(29, 155, 240);
+    color: white;
+    /* opacity: .5; */
+    float: right;
+    border:0;
+    border-radius: 90px;
+    margin-top: 10px;
+}
 
-
+.main .new_tweet form input:hover {
+    -webkit-filter: brightness(90%);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+}
 
 
 
@@ -74,11 +150,11 @@ body {
     /* left: 0; */
     top: 0;
     max-width: calc(20%);
-    width: calc(20%);
+    width: 25%;
     height: calc(100vw);
     padding: 15px 0;
     color: rgb(78, 78, 78);
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .left-menu img {
@@ -183,12 +259,12 @@ body {
 
 
 .right-menu {
-    border-right: 1px solid black;
+    /*border-right: 1px solid black;*/
     position: fixed;
     /* left: 0; */
     top: 0;
     max-width: calc(20%);
-    width: calc(20%);
+    width: 25%;
     height: calc(100vw);
     padding: 15px 0;
 }

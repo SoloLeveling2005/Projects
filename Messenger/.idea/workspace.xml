@@ -5,27 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fadf72c4-9272-4c97-8c87-ec0cca2979ee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/components/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/components/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/components/left-menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/components/left-menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/components/top-menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/components/top-menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/log_auth.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/log_auth.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/assets/css/home/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/home/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/assets/js/home/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/js/home/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/migrations/0002_users_user_profile_description.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/migrations/0003_delete_users.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/migrations/0004_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_auth/views.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/urls.py" afterDir="false" />
@@ -57,29 +40,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;S:/Programmer/Projects/Messenger/frontend/src/todo_app/assets/js&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "S:/Programmer/Projects/Messenger/frontend/src/assets/img/home",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="S:\Programmer\Projects\Messenger\frontend\src\assets\img\home" />
       <recent name="S:\Programmer\Projects\Messenger\frontend\src\todo_app\assets\js" />
       <recent name="S:\Programmer\Projects\Messenger\frontend\src\todo_app\assets\css" />
       <recent name="S:\Programmer\Projects\Messenger\frontend\public\todo_app" />
       <recent name="S:\Programmer\Projects\Messenger\twitter_app\frontend\public" />
-      <recent name="S:\Programmer\Projects\Messenger\twitter_app\frontend\src\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="S:\Programmer\Projects\Messenger\frontend\src" />
@@ -165,6 +148,7 @@
       <workItem from="1669085658370" duration="1580000" />
       <workItem from="1669211305415" duration="9592000" />
       <workItem from="1669262910772" duration="7166000" />
+      <workItem from="1669279359869" duration="5743000" />
     </task>
     <servers />
   </component>

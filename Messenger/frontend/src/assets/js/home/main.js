@@ -20,6 +20,20 @@ window.addEventListener('resize', function(event) {
     document.querySelector(".right-menu").style = `margin-left:${element_1.offsetWidth + element_2.offsetWidth}px;`
 }, true);
 
+
+
+element = document.querySelector(".main");
+document.querySelector(".top-menu").style = `width:${element.offsetWidth - 18}px;` // 15 - отступ паддинг текста
+
+window.addEventListener('resize', function(event) {
+    element = document.querySelector(".main");
+    document.querySelector(".top-menu").style = `width:${element.offsetWidth - 18}px;` // 15 - отступ паддинг текста
+}, true);
+
+
+
+
+
 // function randomIntFromInterval(min, max) {
 // // min and max included
 //     return Math.floor(Math.random() * (max - min + 1) + min)

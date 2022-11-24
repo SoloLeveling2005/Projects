@@ -15,7 +15,7 @@ urlpatterns = [
 
 
     # path('<int:user_id>/<int:id_tweet>/', views.check_tweet, name='check_tweet'),
-    # path('new_tweet/', views.new_tweet, name='new_tweet'),
+    path('new_tweet/', views.new_tweet, name='new_tweet'),
     # path('home/<int:code>/get_info_new_tweet/', views.get_info_new_tweet, name='get_info_new_tweet'),
     # path('home/<int:id_tweet>/<int:user_id>/like_tweet/<int:parent_id_tweet>/<int:parent_user_id>',
     #      views.like_tweet,

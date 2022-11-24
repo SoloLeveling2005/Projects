@@ -1,4 +1,5 @@
 import json
+import re
 from typing import Union
 
 from django.contrib.auth.hashers import make_password
@@ -12,7 +13,7 @@ import datetime
 
 from django.views.decorators.csrf import csrf_exempt
 
-from twitter_app.models import Tweets, Rating, Users
+from twitter_app.models import Tweets, Rating, Users, Keywords
 
 
 def get_user_data(user_id: int = None, user_nickname: str = None, user_password: str = None,
@@ -57,7 +58,7 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
         if user_id is None:
             return render(request, 'public/twitter_app/log_auth.html', context)
         else:
-            return redirect(reverse('twitter_app:home', args=(user_id,)))
+            return redirect(reverse('twitter_app:home', args=()))
     elif request.method == "POST":
         if 'input_nickname_auth' in request.POST:
             nickname = request.POST.get('input_nickname_auth', "")
@@ -126,28 +127,38 @@ def home(request: HttpRequest) -> HttpResponse:
                           context={'user_id': user_id, 'user_data': user_data, 'tweets': tweets,
                                    'likes_user': likes_user})
 
-# @csrf_exempt
-# def new_tweet(request: HttpRequest) -> Union[HttpResponseBadRequest, JsonResponse]:
-#     if request.method == 'POST':
-#         author_id = request.POST.get('author_id', None)
-#         tweet_text = request.POST.get('tweet_text', None)
-#         parent_tweet_id = request.POST.get('parent_tweet_id', None)
-#         print(parent_tweet_id)
-#         author = Users.objects.get(id=int(author_id))
-#         if parent_tweet_id == None:
-#             Tweets.objects.create(author_id=author_id, author_nickname=author.user_nickname,
-#                                   text_tweet=tweet_text, likes=0)
-#         else:
-#             post = Tweets.objects.get(id=parent_tweet_id)
-#             post.comments += 1
-#             post.save()
-#             Tweets.objects.create(author_id=author_id, author_nickname=author.user_nickname,
-#                                   text_tweet=tweet_text, likes=0, parent_tweet_id=parent_tweet_id)
-#             return redirect(reverse('twitter_app:check_tweet', args=(author_id, parent_tweet_id,)))
-#         return redirect(reverse('twitter_app:home', args=(author_id,)))
-#         # return JsonResponse({'status': 'Todo added!'})
-#     return JsonResponse({'status': 'Invalid request'}, status=400)
-#
+@csrf_exempt
+def new_tweet(request: HttpRequest) -> Union[HttpResponseBadRequest, JsonResponse]:
+    if request.method == 'POST':
+        author_id = request.POST.get('author_id', None)
+        tweet_text = request.POST.get('tweet_text', None)
+        parent_tweet_id = request.POST.get('parent_tweet_id', None)
+
+        pat = re.compile(r"#(\w+)")
+        keywords = pat.findall(tweet_text)
+
+        print(parent_tweet_id)
+        author = Users.objects.get(id=int(author_id))
+        if parent_tweet_id is None:
+            Tweets.objects.create(author_id=author_id, author_nickname=author.user_nickname,
+                                  tweet_text=tweet_text, likes=0)
+            tweet_id = Tweets.objects.get(author_id=author_id, author_nickname=author.user_nickname)
+            for keyword in keywords:
+                Keywords.objects.create(tweet_id=tweet_id, keyword=keyword)
+        else:
+            post = Tweets.objects.get(id=parent_tweet_id)
+            post.comments += 1
+            post.save()
+            Tweets.objects.create(author_id=author_id, author_nickname=author.user_nickname,
+                                  text_tweet=tweet_text, likes=0, parent_tweet_id=parent_tweet_id)
+
+            tweet_id = Tweets.objects.get(author_id=author_id, author_nickname=author.user_nickname)
+            for keyword in keywords:
+                Keywords.objects.create(tweet_id=tweet_id, keyword=keyword)
+            return redirect(reverse('twitter_app:check_tweet', args=(author_id, parent_tweet_id,)))
+        return redirect(reverse('twitter_app:home', args=(author_id,)))
+    return JsonResponse({'status': 'Invalid request'}, status=400)
+
 #
 # def get_info_new_tweet(request: HttpRequest, code: int):
 #     if request.method == 'GET':

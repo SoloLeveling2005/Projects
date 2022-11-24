@@ -74,7 +74,7 @@ class Tweets(models.Model):  # TODO таблица в базе данных
     id = models.AutoField(primary_key=True)
     list_display_links = None
     # list_editable = ['nickname', 'password']
-    id_tweet = models.IntegerField(
+    tweet_id = models.IntegerField(
         verbose_name="id_tweet",
         default=0,
         editable=True,
@@ -95,7 +95,7 @@ class Tweets(models.Model):  # TODO таблица в базе данных
         blank=True,
         max_length=300
     )
-    text_tweet = models.CharField(
+    tweet_text = models.CharField(
         verbose_name="text_tweet",
         default="",
         editable=True,
@@ -134,7 +134,7 @@ class Rating(models.Model):  # TODO таблица в базе данных
     id = models.AutoField(primary_key=True)
     list_display_links = None
 
-    id_tweet = models.IntegerField(  # TODO поле в этой таблице
+    tweet_id = models.IntegerField(  # TODO поле в этой таблице
         verbose_name="id_tweet",
         default=0,
         editable=True,
@@ -161,7 +161,7 @@ class Comments(models.Model):
     id = models.AutoField(primary_key=True)
     list_display_links = None
 
-    id_tweet = models.IntegerField(
+    tweet_id = models.IntegerField(
         verbose_name="id_tweet",
         default=0,
         editable=True,
@@ -181,3 +181,21 @@ class Comments(models.Model):
         verbose_name = 'Комментарии твита'
         verbose_name_plural = 'Комментарии твитов'
         # db_table
+
+
+class Keywords(models.Model):
+    id = models.AutoField(primary_key=True)
+    list_display_links = None
+    tweet_id = models.IntegerField(  #
+        verbose_name="tweet_id",
+        default=0,
+        editable=True,
+        blank=True,
+    )
+    keyword = models.CharField(  #
+        verbose_name="keyword",
+        default="",
+        editable=True,
+        blank=True,
+        max_length=60
+    )
