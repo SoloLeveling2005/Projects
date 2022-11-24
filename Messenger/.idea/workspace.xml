@@ -5,9 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fadf72c4-9272-4c97-8c87-ec0cca2979ee" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_settings/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/components/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/components/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/components/left-menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/components/left-menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/components/top-menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/components/top-menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/log_auth.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/log_auth.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/css/home/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/home/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/js/home/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/js/home/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/migrations/0002_users_user_profile_description.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/migrations/0003_delete_users.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/migrations/0004_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_auth/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twitter_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/views.py" afterDir="false" />
     </list>
@@ -143,7 +163,8 @@
       <workItem from="1668998351705" duration="683000" />
       <workItem from="1669033889459" duration="8832000" />
       <workItem from="1669085658370" duration="1580000" />
-      <workItem from="1669211305415" duration="4781000" />
+      <workItem from="1669211305415" duration="9592000" />
+      <workItem from="1669262910772" duration="7166000" />
     </task>
     <servers />
   </component>

@@ -1,12 +1,12 @@
 from django.contrib import admin
 from twitter_app import models as django_models
 
+
 # Register your models here.
 
 # admin.site.site_header = '1111111111'  # default: "Django Administration"
 # admin.site.index_title = '22222222222'  # default: "Site administration"
 # admin.site.site_title = '333333333'  # default: "Django site admin"
-
 
 
 class Users(admin.ModelAdmin):
@@ -68,13 +68,6 @@ class Users(admin.ModelAdmin):
     )
 
 
-
-
-
-
-
-
-
 class Tweets(admin.ModelAdmin):
     """
         Settings admin page for Todo
@@ -128,6 +121,7 @@ class Tweets(admin.ModelAdmin):
         ("Родитель твита", {"fields": ('parent_tweet_id',)}),
     )
 
+
 class Rating(admin.ModelAdmin):
     """
         Settings admin page for Todo
@@ -162,7 +156,6 @@ class Rating(admin.ModelAdmin):
     )
 
 
-
 class Comments(admin.ModelAdmin):
     """
         Settings admin page for Todo
@@ -195,6 +188,7 @@ class Comments(admin.ModelAdmin):
         ("ID твита", {"fields": ('id_tweet',)}),
         ("ID автора", {"fields": ('user_id',)}),
     )
+
 
 admin.site.register(django_models.Users, Users)  # complex register model
 admin.site.register(django_models.Tweets, Tweets)  # complex register model

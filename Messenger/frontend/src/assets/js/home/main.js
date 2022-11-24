@@ -1,21 +1,24 @@
 
 
 // Контроль размер меню и main блока
-var element = document.querySelector(".left-menu");
-var marginLeft = parseInt(getComputedStyle(element, true).marginLeft);
-var marginRight = parseInt(getComputedStyle(element, true).marginRight);
-document.querySelector(".main").style = `margin-left:${element.offsetWidth + marginLeft + marginRight - 50}px;`
-document.querySelector(".top-menu").style = `margin-left:${element.offsetWidth + marginLeft + marginRight - 50}px;`
-console.log(element.offsetWidth + marginLeft + marginRight - 50)
+let element = document.querySelector(".left-menu");
+document.querySelector(".main").style = `margin-left:${element.offsetWidth}px;`
 window.addEventListener('resize', function(event) {
-    var element = document.querySelector(".left-menu");
-    var marginLeft = parseInt(getComputedStyle(element, true).marginLeft);
-    var marginRight = parseInt(getComputedStyle(element, true).marginRight);
-    document.querySelector(".main").style = `margin-left:${element.offsetWidth + marginLeft + marginRight - 50}px;`
-    document.querySelector(".top-menu").style = `margin-left:${element.offsetWidth + marginLeft + marginRight - 50}px;`
-    console.log(element.offsetWidth + marginLeft + marginRight - 50)
+    let element = document.querySelector(".left-menu");
+    document.querySelector(".main").style = `margin-left:${element.offsetWidth}px;`
 }, true);
 
+
+
+let element_1 = document.querySelector(".left-menu");
+let element_2 = document.querySelector(".main");
+document.querySelector(".right-menu").style = `margin-left:${element_1.offsetWidth + element_2.offsetWidth}px;`
+
+window.addEventListener('resize', function(event) {
+    let element_1 = document.querySelector(".left-menu");
+    let element_2 = document.querySelector(".main");
+    document.querySelector(".right-menu").style = `margin-left:${element_1.offsetWidth + element_2.offsetWidth}px;`
+}, true);
 
 // function randomIntFromInterval(min, max) {
 // // min and max included

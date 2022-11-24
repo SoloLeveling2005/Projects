@@ -9,9 +9,9 @@ urlpatterns = [
     # Глобальные пути
     path('', views.log_auth, name='log_auth'),  # страница с регистрацией
     path('home/', views.home, name='home'),  # главная страница
-    path('explore/', views.explore, name='explore'),  # страница с поиском
-    path('<str:nickname>/', views.profile, name='profile'),  # страница профиля пользователя (любого)
-    path('<str:nickname>/status/<int:id_tweet>', views.status_tweet, name='status_tweet'),  # страница просмотра твита
+    # path('explore/', views.explore, name='explore'),  # страница с поиском
+    # path('<str:nickname>/', views.profile, name='profile'),  # страница профиля пользователя (любого)
+    # path('<str:nickname>/status/<int:id_tweet>', views.status_tweet, name='status_tweet'),  # страница просмотра твита
 
 
     # path('<int:user_id>/<int:id_tweet>/', views.check_tweet, name='check_tweet'),

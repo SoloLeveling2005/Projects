@@ -4,8 +4,6 @@ from django.db import models
 # Create your models here.
 
 
-
-
 class Users(models.Model):
     id = models.AutoField(primary_key=True)
     list_display_links = None
@@ -60,8 +58,9 @@ class Users(models.Model):
         editable=True,
         blank=True,
     )
+
     class Meta:
-        app_label = 'log_auth'
+        app_label = 'twitter_app'
         ordering = ('id',)
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
@@ -71,33 +70,32 @@ class Users(models.Model):
     #     return f"Todo: {self.title} ({self.user}) [{self.id}]"
 
 
-
 class Tweets(models.Model):  # TODO таблица в базе данных
     id = models.AutoField(primary_key=True)
     list_display_links = None
     # list_editable = ['nickname', 'password']
-    id_tweet = models.IntegerField(  # TODO поле в этой таблице
+    id_tweet = models.IntegerField(
         verbose_name="id_tweet",
         default=0,
         editable=True,
         blank=True,
     )
 
-    author_id = models.IntegerField(  # TODO поле в этой таблице
+    author_id = models.IntegerField(
         verbose_name="author_id",
         default=0,
         editable=True,
         blank=True,
 
     )
-    author_nickname = models.CharField(  # TODO поле в этой таблице
+    author_nickname = models.CharField(
         verbose_name="author_nickname",
         default="",
         editable=True,
         blank=True,
         max_length=300
     )
-    text_tweet = models.CharField(  # TODO поле в этой таблице
+    text_tweet = models.CharField(
         verbose_name="text_tweet",
         default="",
         editable=True,
@@ -159,18 +157,18 @@ class Rating(models.Model):  # TODO таблица в базе данных
         # db_table
 
 
-class Comments(models.Model):  # TODO таблица в базе данных
+class Comments(models.Model):
     id = models.AutoField(primary_key=True)
     list_display_links = None
 
-    id_tweet = models.IntegerField(  # TODO поле в этой таблице
+    id_tweet = models.IntegerField(
         verbose_name="id_tweet",
         default=0,
         editable=True,
         blank=True,
     )
 
-    user_id = models.IntegerField(  # TODO поле в этой таблице
+    user_id = models.IntegerField(
         verbose_name="user_id",
         default=0,
         editable=True,

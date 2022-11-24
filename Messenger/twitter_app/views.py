@@ -15,15 +15,41 @@ from django.views.decorators.csrf import csrf_exempt
 from twitter_app.models import Tweets, Rating, Users
 
 
-def get_user_data(user_nickname: str, user_password: str):
+def get_user_data(user_id: int = None, user_nickname: str = None, user_password: str = None,
+                  according_data: str = None):
     """
-    Функция возвращает все данные пользователя
+    according_data - по каким данным искать
+
+    в случае ошибки вернет None
     """
+    try:
+        if according_data == "user_id":
+            return Users.objects.get(id=user_id)
+        elif according_data == "user_nickname/user_password":
+            return Users.objects.get(user_nickname=user_nickname, user_password=user_password)
+        else:
+            return None
+    except Exception as e:
+        print(e)
+        return None
 
 
-get_user_data("", "")
+def get_likes_user(user_id: int):
+    """
+    Функция возвращает массив id твитов, которые лайкнул пользователь с id = user_id
+    в случае ошибки вернет None
+    """
+    try:
+        mass_likes_user = []
+        for like_user in Rating.objects.filter(user_id=user_id):
+            mass_likes_user.append(like_user.id_tweet)
+        return mass_likes_user
+    except Exception as e:
+        print(e)
+        return None
 
 
+@csrf_exempt
 def log_auth(request: HttpRequest, context=None) -> HttpResponse:
     if request.method == "GET":
         context = {}
@@ -33,97 +59,72 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
         else:
             return redirect(reverse('twitter_app:home', args=(user_id,)))
     elif request.method == "POST":
-
         if 'input_nickname_auth' in request.POST:
-            # TODO получить с формы данные
             nickname = request.POST.get('input_nickname_auth', "")
             password = request.POST.get('input_password_auth', "")
             print(nickname)
             print(password)
-            try:
-                print("До сюда дошел")
-                post_name = Users.objects.get(user_nickname=nickname, user_password=password)
-                print(post_name.user_nickname)
-                print(post_name.user_password)
-            except:
-                context = {"error": "Такого пользователя не существует"}
-                context = {'data': json.dumps(context)}
+            user_id = get_user_data(user_nickname=nickname, user_password=password,
+                                    according_data="user_nickname/user_password")
+            if user_id is None:
+                context = {'data': json.dumps({"error": "Такого пользователя не существует"})}
+                print("Такого пользователя не существует")
                 return render(request, 'public/twitter_app/log_auth.html', context=context)
-
-            home_page = redirect(reverse('twitter_app:home', args=(post_name.id,)))
-
-            home_page.set_cookie('user_id', post_name.id, max_age=60 * 20)
-            return home_page
+            else:
+                home_page = redirect(reverse('twitter_app:home', args=()))
+                home_page.set_cookie('user_id', user_id.id, max_age=60 * 20)
+                return home_page
 
         elif 'input_nickname' in request.POST:
-            # TODO получить с формы данные
             name = request.POST.get('input_name', "")
             nickname = request.POST.get('input_nickname', "")
             password = request.POST.get('input_password', "")
             repeat_password = request.POST.get('input_repeat_password', "")
 
             if password != repeat_password:
-                context = {"error": "Пароли не совпадают"}
-                context = {'data': json.dumps(context)}
+                context = {'data': json.dumps({"error": "Пароли не совпадают"})}
+                print("Пароли не совпадают")
                 return render(request, 'public/twitter_app/log_auth.html', context=context)
 
             if name and nickname and password:
-                try:
-                    Users.objects.get(user_nickname=nickname, user_password=password)
-                    context = {"error": "Пользователь с такими данными уже существует"}
-                    context = {'data': json.dumps(context)}
+                if get_user_data(user_nickname=nickname, user_password=password,
+                                 according_data="user_nickname/user_password"):
+                    context = {json.dumps({"error": "Пользователь с такими данными уже существует"})}
                     print("Пользователь с такими данными уже существует")
-                    return render(request, 'public/twitter_app/log_auth.html', context=context)
-                except:
-                    pass
+                    return render(request, 'public/twitter_app/log_auth.html')
 
                 Users.objects.create(
                     user_name=name,
                     user_nickname=nickname,
                     user_password=password,
                 )
-                new_user_id = Users.objects.get(user_nickname=nickname, user_password=password).id
-                home_page = redirect(reverse('twitter_app:home', args=(new_user_id,)))
 
-                home_page.set_cookie('user_id', new_user_id, max_age=60 * 20)
-
+                user_id = get_user_data(user_nickname=nickname, user_password=password,
+                                        according_data="user_nickname/user_password").id
+                home_page = redirect(reverse('twitter_app:home', args=()))
+                home_page.set_cookie('user_id', user_id, max_age=60 * 20)
                 return home_page
             else:
-                context = {"error": "поля не заполнены!"}
-                context = {'data': json.dumps(context)}
+                context = {'data': json.dumps({"error": "поля не заполнены!"})}
                 print("поля не заполнены!")
                 return render(request, 'public/twitter_app/log_auth.html', context=context)
 
 
-def home(request: HttpRequest, code: int = 0) -> HttpResponse:
+def home(request: HttpRequest) -> HttpResponse:
     if request.method == "GET":
         user_id = request.COOKIES.get('user_id')
         print("Я дома")
         if user_id is None:
-            return redirect(reverse('log_auth:log_auth', args=()))
+            return redirect(reverse('twitter_app:log_auth', args=()))
         else:
-            if int(user_id) == int(code):
-                likes_user = Rating.objects.filter(user_id=user_id)
-                mass_likes_user = []
-                for like_user in likes_user:
-                    mass_likes_user.append(like_user.id_tweet)
-                print(mass_likes_user)
-                # todos = list(Tweets.objects.all().values())
-                todos = list(Tweets.objects.filter(parent_tweet_id=None).values())
+            user_data = get_user_data(user_id=user_id, according_data="user_id")  # получаем данные пользователя по id
+            likes_user = get_likes_user(user_id=user_id)  # твиты которые лайкнул юзер
+            tweets = list(Tweets.objects.filter(parent_tweet_id=None).values())  # твиты которые не имеют родителя
+            print(tweets)
 
-                mass_comments_user = []
-                for like_user in likes_user:
-                    mass_comments_user.append(like_user.id_tweet)
-                print(mass_comments_user)
-
-                print(todos)
-                user_nickname = Users.objects.get(id=user_id).user_nickname
-                return render(request, 'public/twitter_app/home.html',
-                              context={'user_id': user_id, 'content': todos, 'user_nickname': user_nickname,
-                                       'mass_likes_user': mass_likes_user, 'mass_comments_user': mass_comments_user,
-                                       })
-            else:
-                return redirect(reverse('twitter_app:home', args=(user_id,)))
+            return render(request, 'public/twitter_app/home.html',
+                          context={'user_id': user_id, 'user_data': user_data, 'tweets': tweets,
+                                   'likes_user': likes_user})
 
 # @csrf_exempt
 # def new_tweet(request: HttpRequest) -> Union[HttpResponseBadRequest, JsonResponse]:
