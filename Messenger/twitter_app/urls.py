@@ -9,13 +9,17 @@ urlpatterns = [
     # Глобальные пути
     path('', views.log_auth, name='log_auth'),  # страница с регистрацией
     path('home/', views.home, name='home'),  # главная страница
+    path('explore/', views.explore, name='explore'),  # страница с поиском
     # path('explore/', views.explore, name='explore'),  # страница с поиском
-    # path('<str:nickname>/', views.profile, name='profile'),  # страница профиля пользователя (любого)
-    # path('<str:nickname>/status/<int:id_tweet>', views.status_tweet, name='status_tweet'),  # страница просмотра твита
 
+    path('go_back/', views.go_back, name='go_back'),  # главная страница
 
-    # path('<int:user_id>/<int:id_tweet>/', views.check_tweet, name='check_tweet'),
+    path('delete_tweet/<int:tweet_id>/', views.delete_tweet, name='delete_tweet'),
+    # path('delete_tweet/<int:tweet_id>/', views.delete_tweet, name='delete_tweet'),
     path('new_tweet/', views.new_tweet, name='new_tweet'),
+    path('like_tweet/<int:tweet_id>', views.like_tweet, name='like_tweet'),
+    path('<str:nickname>/', views.profile, name='profile'),  # страница профиля пользователя (любого)
+    path('<str:nickname>/status/<int:tweet_id>', views.status_tweet, name='status_tweet'),  # страница просмотра твита
     # path('home/<int:code>/get_info_new_tweet/', views.get_info_new_tweet, name='get_info_new_tweet'),
     # path('home/<int:id_tweet>/<int:user_id>/like_tweet/<int:parent_id_tweet>/<int:parent_user_id>',
     #      views.like_tweet,

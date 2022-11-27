@@ -4,7 +4,8 @@ from typing import Union
 
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group
-from django.http import HttpRequest, HttpResponse, JsonResponse, HttpResponseBadRequest
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpRequest, HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -13,7 +14,7 @@ import datetime
 
 from django.views.decorators.csrf import csrf_exempt
 
-from twitter_app.models import Tweets, Rating, Users, Keywords
+from twitter_app.models import Tweets, Rating, Users, Keywords, Comments
 
 
 def get_user_data(user_id: int = None, user_nickname: str = None, user_password: str = None,
@@ -111,10 +112,63 @@ def log_auth(request: HttpRequest, context=None) -> HttpResponse:
                 return render(request, 'public/twitter_app/log_auth.html', context=context)
 
 
+class CustomPaginator:
+    @staticmethod
+    def paginate(object_list: any, per_page=5, page_number=1):
+        # https://docs.djangoproject.com/en/4.1/topics/pagination/
+        paginator_instance = Paginator(object_list=object_list, per_page=per_page)
+        try:
+            page = paginator_instance.page(number=page_number)
+        except PageNotAnInteger:
+            page = paginator_instance.page(number=1)
+        except EmptyPage:
+            page = paginator_instance.page(number=paginator_instance.num_pages)
+        return page
+
+def explore(request: HttpRequest) -> HttpResponse:
+    if request.method == "GET":
+        user_id = request.COOKIES.get('user_id')
+        if user_id is None:
+            return redirect(reverse('twitter_app:log_auth', args=()))
+        else:
+            user_data = get_user_data(user_id=user_id, according_data="user_id")  # получаем данные пользователя по id
+            likes_user = get_likes_user(user_id=user_id)  # твиты которые лайкнул юзер
+            tweets = []
+            mass_tweets = []
+            key = request.GET.get('keyword', None)
+            print("key",key)
+            try:
+                if key is not None:
+                    need = Keywords.objects.filter(keyword=str(key)).values()
+                    # print("Keywords", Keywords.objects.filter(keyword=str(key)).values())
+                    print("need1",need[0])
+                    for i in need:
+                        print("i",i)
+                        print(Tweets.objects.filter(id=int(i['tweet_id'])))
+                        mass_tweets.extend([Tweets.objects.filter(id=i['tweet_id']).values()])
+                    print("mm",mass_tweets)
+
+                    mass_tweets = CustomPaginator.paginate(
+                        object_list=mass_tweets, per_page=6, page_number=request.GET.get('page', 1)
+                    )
+            except:
+                pass
+
+
+
+            return render(request, 'public/twitter_app/explore.html',
+                          context={'user_id': user_id, 'user_data': user_data, 'tweets': mass_tweets,
+                                   'likes_user': likes_user,'key':key})
+    elif request.method == "POST":
+        keyword = request.GET.get('keyword', None)
+        return redirect(reverse('twitter_app:explore', args=(keyword,)))
+
+
 def home(request: HttpRequest) -> HttpResponse:
     if request.method == "GET":
         user_id = request.COOKIES.get('user_id')
         print("Я дома")
+
         if user_id is None:
             return redirect(reverse('twitter_app:log_auth', args=()))
         else:
@@ -127,8 +181,21 @@ def home(request: HttpRequest) -> HttpResponse:
                           context={'user_id': user_id, 'user_data': user_data, 'tweets': tweets,
                                    'likes_user': likes_user})
 
+
+def recursive_comment_tweets(tweet_id):  # рекурсивно увеличиваем кол-во комментов
+    tweet = Tweets.objects.get(id=tweet_id)
+    tweet.comments += 1
+    tweet.save()
+    parent = Tweets.objects.filter(id=tweet.parent_tweet_id)
+    if parent:
+        # Удаляем твиты
+        for i in parent:
+            recursive_comment_tweets(i.id)
+    # Выходим
+
+
 @csrf_exempt
-def new_tweet(request: HttpRequest) -> Union[HttpResponseBadRequest, JsonResponse]:
+def new_tweet(request: HttpRequest) -> HttpResponseRedirect | JsonResponse:
     if request.method == 'POST':
         author_id = request.POST.get('author_id', None)
         tweet_text = request.POST.get('tweet_text', None)
@@ -142,23 +209,129 @@ def new_tweet(request: HttpRequest) -> Union[HttpResponseBadRequest, JsonRespons
         if parent_tweet_id is None:
             Tweets.objects.create(author_id=author_id, author_nickname=author.user_nickname,
                                   tweet_text=tweet_text, likes=0)
-            tweet_id = Tweets.objects.get(author_id=author_id, author_nickname=author.user_nickname)
+            tweet_id = list(Tweets.objects.filter(author_id=author_id, author_nickname=author.user_nickname))[-1]
             for keyword in keywords:
-                Keywords.objects.create(tweet_id=tweet_id, keyword=keyword)
+                Keywords.objects.create(tweet_id=tweet_id.id, keyword=keyword)
         else:
-            post = Tweets.objects.get(id=parent_tweet_id)
-            post.comments += 1
-            post.save()
+            tweet_id = list(Tweets.objects.filter(author_id=author_id, author_nickname=author.user_nickname))[-1]
+            recursive_comment_tweets(tweet_id.id)
             Tweets.objects.create(author_id=author_id, author_nickname=author.user_nickname,
-                                  text_tweet=tweet_text, likes=0, parent_tweet_id=parent_tweet_id)
+                                  tweet_text=tweet_text, likes=0, parent_tweet_id=parent_tweet_id)
 
-            tweet_id = Tweets.objects.get(author_id=author_id, author_nickname=author.user_nickname)
+            nickname = Tweets.objects.get(id=tweet_id.id).author_nickname
             for keyword in keywords:
-                Keywords.objects.create(tweet_id=tweet_id, keyword=keyword)
-            return redirect(reverse('twitter_app:check_tweet', args=(author_id, parent_tweet_id,)))
-        return redirect(reverse('twitter_app:home', args=(author_id,)))
+                Keywords.objects.create(tweet_id=tweet_id.id, keyword=keyword)
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return JsonResponse({'status': 'Invalid request'}, status=400)
 
+
+def recursive_delete_tweets(tweet_id):
+    try:
+        parent_tweet = Tweets.objects.get(id=Tweets.objects.get(id=tweet_id).parent_tweet_id)  # получаем родителя твита
+        parent_tweet.likes -= Tweets.objects.get(id=tweet_id).likes
+        parent_tweet.comments -= 1
+        parent_tweet.save()
+    except:
+        pass
+    Tweets.objects.get(id=tweet_id).delete()  # удаляет сам твит
+    Rating.objects.filter(tweet_id=tweet_id).delete()  # удаляет его собственные лайки (кол-во)
+    Keywords.objects.filter(tweet_id=tweet_id).delete()  # удаляет его собственные ключевики
+    sons = Tweets.objects.filter(parent_tweet_id=tweet_id)  # получаем кго дочерние твиты для удаления
+    if sons:
+        Comments.objects.filter(tweet_id=tweet_id).delete()  # удаляет его количество комментариев
+        # Удаляем твиты
+        for i in sons:
+            recursive_delete_tweets(i.id)
+        # Выходим
+
+
+def delete_tweet(request: HttpRequest, tweet_id: int):
+    if request.method == 'GET':
+        user_id = request.COOKIES.get('user_id')
+        recursive_delete_tweets(tweet_id)
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return JsonResponse({'status': 'Invalid request'}, status=400)
+
+
+def recursive_like_tweets(tweet_id):
+    tweet = Tweets.objects.get(id=tweet_id)
+    tweet.likes += 1
+    tweet.save()
+    parent = Tweets.objects.filter(id=tweet.parent_tweet_id)
+    if parent:
+        # Удаляем твиты
+        for i in parent:
+            recursive_like_tweets(i.id)
+    # Выходим
+
+
+def recursive_dislike_tweets(tweet_id):
+    tweet = Tweets.objects.get(id=tweet_id)
+    tweet.likes -= 1
+    tweet.save()
+    parent = Tweets.objects.filter(id=tweet.parent_tweet_id)
+    if parent:
+        # Удаляем твиты
+        for i in parent:
+            recursive_dislike_tweets(i.id)
+
+    # Выходим
+
+
+def like_tweet(request: HttpRequest, tweet_id: int):
+    if request.method == 'GET':
+        user_id = request.COOKIES.get('user_id')
+        tweet = Rating.objects.filter(tweet_id=tweet_id, user_id=user_id)
+        if tweet:
+            post = Rating.objects.get(tweet_id=tweet_id, user_id=user_id)
+            post.delete()
+            recursive_dislike_tweets(tweet_id)
+        else:
+            Rating.objects.create(tweet_id=tweet_id, user_id=user_id)
+            recursive_like_tweets(tweet_id)
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return JsonResponse({'status': 'Invalid request'}, status=400)
+
+
+def status_tweet(request: HttpRequest, nickname: str, tweet_id: int) -> HttpResponse:
+    if request.method == 'GET':
+        user_id = request.COOKIES.get('user_id')
+        if user_id is None:
+            return redirect(reverse('twitter_app:log_auth', args=()))
+        else:
+            user_data = get_user_data(user_id=user_id, according_data="user_id")
+            tweets = list(Tweets.objects.filter(parent_tweet_id=tweet_id).values())
+            likes_user = get_likes_user(user_id=user_id)
+            this_tweet = Tweets.objects.get(id=tweet_id)
+            return render(request, 'public/twitter_app/status_tweet.html',
+                          context={'user_id': user_id, 'user_data': user_data, 'tweets': tweets,
+                                   'likes_user': likes_user, 'parent_tweet_id': tweet_id, 'this_tweet': this_tweet})
+
+
+def profile(request: HttpRequest, nickname: str) -> HttpResponse:
+    if request.method == 'GET':
+        user_id = request.COOKIES.get('user_id')
+        if user_id is None:
+            return redirect(reverse('twitter_app:log_auth', args=()))
+        else:
+            user_data = get_user_data(user_id=user_id, according_data="user_id")  # получаем данные пользователя по id
+            likes_user = get_likes_user(user_id=user_id)  # твиты которые лайкнул юзер
+            tweets = list(Tweets.objects.filter(author_id=user_data.id).values())  # твиты которые не имеют родителя
+            print(tweets)
+
+            return render(request, 'public/twitter_app/home.html',
+                          context={'user_id': user_id, 'user_data': user_data, 'tweets': tweets,
+                                   'likes_user': likes_user})
+    else:
+        return redirect(reverse('twitter_app:log_auth', args=()))
+
+
+def go_back(request: HttpRequest, ):
+    print(request.META)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 #
 # def get_info_new_tweet(request: HttpRequest, code: int):
 #     if request.method == 'GET':

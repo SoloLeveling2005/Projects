@@ -199,3 +199,10 @@ class Keywords(models.Model):
         blank=True,
         max_length=60
     )
+
+    class Meta:
+        app_label = 'twitter_app'
+        ordering = ('id',)
+        verbose_name = 'Ключевое слово'
+        verbose_name_plural = 'Ключевые слова'
+        # db_table

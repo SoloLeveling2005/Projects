@@ -229,3 +229,4 @@ admin.site.register(django_models.Users, Users)  # complex register model
 admin.site.register(django_models.Tweets, Tweets)  # complex register model
 admin.site.register(django_models.Rating, Rating)  # complex register model
 admin.site.register(django_models.Comments, Comments)  # complex register model
+admin.site.register(django_models.Keywords, Keywords)  # complex register model
