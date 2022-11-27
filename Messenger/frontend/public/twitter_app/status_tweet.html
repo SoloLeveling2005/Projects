@@ -1,50 +1,54 @@
 {% extends 'public/twitter_app/components/base.html' %}
 {% load static %}
 {% block main %}
-    <main>
+    <main class="home-page">
         {% include 'public/twitter_app/components/left-menu.html' %}
-        {% include 'public/twitter_app/components/top-menu.html' %}
-        <section class="main check_tweet_page">
+{#        {% include 'public/twitter_app/components/top-menu.html' %}#}
+        <section class="main">
+            <div class="top-menu">
+                <span>Home</span>
+{#                <div class="hr"></div>#}
+            </div>
             <div class="parent-tweet">
                 <div class="top-element">
-                    <div class="profile">{{ this_tweet.author_nickname.0 }}</div>
+                    <div class="profile">{{ this_tweet.user_name.0 }}</div>
                     <div class="title" style="display: flex;">{{ this_tweet.author_nickname }}</div>
-                    <div class="action-button"><img style="width: 15px;height: 15px;" src="{% static 'src/twitter_app/assets/img/home/more_2.png' %}" alt=""></div>
+                    <div class="action-button"><img style="width: 15px;height: 15px;" src="{% static 'img/home/more_2.png' %}" alt=""></div>
                 </div>
-                <div class="content">{{ this_tweet.text_tweet }}</div>
+                <div class="content">{{ this_tweet.tweet_text }}</div>
                 <div class="action-button">
                     <div class="div"><img src="" alt=""></div>
                 </div>
                 <div class="new_tweet">
-                    <div class="profile" style="display: flex;">{{user_data.user_nickname.0}}</div>
-                    <form action="/twitter_app/new_tweet/" method="POST" class="new_tweet_in_content_block">
+                    <div class="profile" style="display: flex;">{{user_data.user_name.0}}</div>
+                    <form action="{% url 'twitter_app:new_tweet' %}" method="POST" class="new_tweet_in_content_block">
                         {% csrf_token %}
                         <input type="hidden" name="csrfmiddlewaretoken" value="pU3kc9QnWzu34cFpEwz5HpXnTuKGHFA8DjFLMvXFdO3hFu7fz9hUqFLot2iVjSiK">
                         <textarea class="tweet_text" name="tweet_text" id="" maxlength="200" contenteditable="true" placeholder="Whats happaning?"></textarea>
-                        <input type="hidden" value="1" name="author_id">
-                        <input type="hidden" value="{{this_tweet.id}}" name="parent_tweet_id">
+                        <input type="hidden" value="{{ user_data.id }}" name="author_id">
+                        <input type="hidden" value="{{ parent_tweet_id }}" name="parent_tweet_id">
                         <input type="submit" value="Tweet" onclick="">
                     </form>
                 </div>
                 <div class="tweets">
-                    {% for tweet in content %}
+                    {% for tweet in tweets %}
                         <div class="tweet">
                                 <div class="logo">{{user_data.user_nickname.0}}</div>
                                 <div id="tweet-content" class="tweet-content">
                                     <div class="tweet-actions-top">
                                         <a href="" class="tweet-author-nickname">{{tweet.author_nickname}}</a>
                                         {% if tweet.author_id|add:"0" == user_id|add:"0" %} {# Добавил строку к данным чтобы они стали одинаковым типом (использовать с осторожностью) #}
-                                            <a href="{% url 'twitter_app:delete_tweet' user_data.id tweet.id %}"><img src="{% static 'src/twitter_app/assets/img/home/close.png' %}" alt="" class="close-tweet"></a>
+                                            <a href="{% url 'twitter_app:delete_tweet' tweet.id %}"><img src="{% static 'img/home/close.png' %}" alt="" class="close-tweet"></a>
                                         {% endif %}
                                     </div>
-                                    <p class="tweet-text">{{tweet.text_tweet}}</p>
+                                    <p class="tweet-text">{{tweet.tweet_text}}</p>
                                     <div class="tweet-actions-bottom">
                                         {% if tweet.id in mass_likes_user %}
-                                            <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_data.id parent_id_tweet=this_id_tweet parent_user_id=this_user_id%}"><img src="{% static 'src/twitter_app/assets/img/home/like_on.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                            <a href="{% url 'twitter_app:like_tweet' tweet_id=tweet.id%}"><img src="{% static 'img/home/like_on.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
                                         {% elif tweet.id %}
-                                            <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_data.id parent_id_tweet=this_id_tweet parent_user_id=this_user_id%}"><img src="{% static 'src/twitter_app/assets/img/home/like_off.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                            <a href="{% url 'twitter_app:like_tweet' tweet_id=tweet.id%}"><img src="{% static 'img/home/like_off.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
                                         {% endif %}
-                                            <a style="margin-left: 20px;" href="{% url 'twitter_app:check_tweet' user_id=user_data.id  id_tweet=tweet.id %}"><img src="{% static 'src/twitter_app/assets/img/home/comment.png' %}" alt=""></a>
+                                            <a style="margin-left: 20px;" href="{% url 'twitter_app:status_tweet' nickname=user_data.user_nickname  tweet_id=tweet.id %}"><img src="{% static 'img/home/comment.png' %}" alt=""></a>
                                         <span class="tweet-likes">
                                             {% if tweet.parent_tweet_id %}
                                                 {{tweet.comments}}
@@ -59,21 +63,30 @@
                 </div>
             </div>
         </section>
+        <section class="right-menu">
+            12334
+        </section>
     </main>
     <script>
         document.querySelector(".top-menu").innerHTML = `
-        <a href="{% url 'twitter_app:home' user_data.id %}" class="back_home"><img src="{% static 'src/twitter_app/assets/img/check_tweet/back.png' %}" alt=""></a>
+        <a href="{% url 'twitter_app:home' %}" class="back_home"><img src="{% static 'img/check_tweet/back.png' %}" alt=""></a>
         Tweet
         `
     </script>
     <style>
+        main {
+            width: 80%;
+        }
         .main {
-            padding-left: 20px;
-            padding-right: 20px;
+            padding-left: 15px;
+            padding-right: 15px;
         }
         .top-menu {
             display: flex;
             align-items: center;
+        }
+        .main .top-menu {
+            padding-left: 0;
         }
         .back_home {
             padding: 7px;
@@ -161,6 +174,10 @@
             padding-bottom: 10px;
             padding: 15px 19px;
             /*width: 100%;*/
+        }
+        .main .new_tweet {
+            padding: 0;
+            padding-bottom: 15px;
         }
         .parent-tweet .new_tweet .profile {
             width: 55px;
