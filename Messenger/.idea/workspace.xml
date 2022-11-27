@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fadf72c4-9272-4c97-8c87-ec0cca2979ee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/check_tweet.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/status_tweet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/components/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/components/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/components/left-menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/components/left-menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/twitter_app/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/twitter_app/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/css/home/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/home/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="fadf72c4-9272-4c97-8c87-ec0cca2979ee" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -154,7 +143,7 @@
       <workItem from="1669300730546" duration="4344000" />
       <workItem from="1669384955842" duration="4271000" />
       <workItem from="1669444956625" duration="11964000" />
-      <workItem from="1669514260239" duration="21793000" />
+      <workItem from="1669514260239" duration="22400000" />
     </task>
     <servers />
   </component>
