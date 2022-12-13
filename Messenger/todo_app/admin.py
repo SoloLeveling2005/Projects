@@ -14,41 +14,31 @@ class Tasks(admin.ModelAdmin):
         Settings admin page for Todo
     """
     list_display = (  # отображение
-        # 'id',
-        'author_id',
+        'id',
         'task_title',
-        'task_description',
         'done',
     )
     list_display_links = (  # для ссылка (для перехода внутрь)
-        # 'id',
-        'author_id',
+        'id',
         'task_title',
-        'task_description',
         'done',
     )
     list_editable = (  # поле, доступное для редактирования в общем списке
 
     )
     list_filter = (  # поля для фильтрации
-        # 'id',
-        'author_id',
+        'id',
         'task_title',
-        'task_description',
         'done',
     )
     search_fields = (  # поля для поиска (ввод поиска в одном месте)
-        # 'id',
-        'author_id',
+        'id',
         'task_title',
-        'task_description',
         'done',
     )
     fieldsets = (
         # ("ID", {"fields": ('id',)}),
-        ("Author", {"fields": ('author_id',)}),
         ("Title", {"fields": ('task_title',)}),
-        ("Description", {"fields": ('task_description',)}),
         ("Done", {"fields": ('done',)}),
     )
 

@@ -12,22 +12,8 @@ class Tasks(models.Model):  # TODO таблица в базе данных
     list_display_links = None
     # list_editable = ['nickname', 'password']
 
-    author_id = models.IntegerField(  # TODO поле в этой таблице
-        verbose_name="author_id",
-        default=0,
-        editable=True,
-        blank=True,
-
-    )
     task_title = models.CharField(  # TODO поле в этой таблице
         verbose_name="text_tweet",
-        default="",
-        editable=True,
-        blank=True,
-        max_length=300
-    )
-    task_description = models.CharField(  # TODO поле в этой таблице
-        verbose_name="task_description",
         default="",
         editable=True,
         blank=True,

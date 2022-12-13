@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="fadf72c4-9272-4c97-8c87-ec0cca2979ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_settings/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_settings/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_settings/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo_app/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo_app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo_app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_app/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +155,9 @@
       <workItem from="1669514260239" duration="22998000" />
       <workItem from="1669637853943" duration="1192000" />
       <workItem from="1669695244613" duration="1523000" />
+      <workItem from="1669803005776" duration="9107000" />
+      <workItem from="1669866524641" duration="2268000" />
+      <workItem from="1670412673053" duration="9000" />
     </task>
     <servers />
   </component>

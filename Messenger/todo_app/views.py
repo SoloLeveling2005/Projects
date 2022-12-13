@@ -10,9 +10,10 @@ from django.views import View
 from random import randint
 import datetime
 
+from django.views.decorators.csrf import csrf_exempt
+
 from todo_app import models
 from todo_app.models import Tasks
-from log_auth.models import Users
 
 
 def get_example_tasks(request: HttpRequest):
@@ -38,24 +39,26 @@ def task_detail(request: HttpRequest, task_id: int):
         return render(request, 'public/todo_app/one.html', context={'content': task})
 
 
-def complete_task(request: HttpRequest, task_id: int):
+def complete_task(request: HttpRequest, task_id):
     if request.method == "GET":
-        author_id = get_one_task(task_id).author_id
+        # author_id = get_one_task(task_id).author_id
         task = get_one_task(task_id)
         task.done = True
         task.save()
-        with open("logs.txt", "a") as myfile:
-            myfile.write(f"- Пользователь {author_id} выполнил задачу {task_id}\n")
-        return redirect(reverse('todo_app:home', args=(author_id,)))
+        # with open("logs.txt", "a") as myfile:
+        #     myfile.write(f"- Пользователь {author_id} выполнил задачу {task_id}\n")
+        # return redirect(reverse('todo_app:home', args=(author_id,)))
+        return JsonResponse({'response': True}, safe=False, status=200)
 
 
-def delete_task(request: HttpRequest, task_id: int):
+def delete_task(request: HttpRequest, task_id):
     if request.method == "GET":
-        author_id = Tasks.objects.get(id=task_id).author_id
+        # author_id = Tasks.objects.get(id=task_id).author_id
         Tasks.objects.get(id=task_id).delete()
-        with open("logs.txt", "a") as myfile:
-            myfile.write(f"- Пользователь {author_id} удали задачу {task_id}\n")
-        return redirect(reverse('todo_app:home', args=(author_id,)))
+        # with open("logs.txt", "a") as myfile:
+        #     myfile.write(f"- Пользователь {author_id} удали задачу {task_id}\n")
+        # return redirect(reverse('todo_app:home', args=(author_id,)))
+        return JsonResponse({'response': True}, safe=False, status=200)
 
 
 def new_task(request: HttpRequest, user_id: int):
@@ -96,3 +99,38 @@ def home(request: HttpRequest, user_id: int = 0) -> HttpResponse:
                 with open("logs.txt", "a") as myfile:
                     myfile.write("Начало работы\n")
                 return redirect(reverse('todo_app:home', args=(cookies_user_id,)))
+
+
+def get_tasks(request: HttpRequest):
+    data = get_all_tasks()
+    print(list(data.values()))
+    # return HttpResponse()
+    return JsonResponse({'response': list(data.values())}, safe=False, status=200)
+
+@csrf_exempt
+def create_task(request: HttpRequest, text):
+    print(text)
+    print(request.GET)
+    print(request.POST)
+    print(request.FILES)
+    Tasks.objects.create(
+        task_title=text,
+        done=False
+    )
+    return JsonResponse({'response': True}, safe=False, status=200)
+    # title = request.POST.get('title', "")
+    # description = request.POST.get('description', "")
+    #
+    # if title == "" or description == "":
+    #     print("Данные пустые")
+    #     print(title)
+    #     print(description)
+    #     return
+    #
+    # Tasks.objects.create(
+    #     task_title=title,
+    #     task_description=description,
+    #     done=False
+    # )
+    #
+    # return JsonResponse({'response': True}, safe=False, status=200)

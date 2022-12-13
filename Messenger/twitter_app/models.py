@@ -206,3 +206,4 @@ class Keywords(models.Model):
         verbose_name = 'Ключевое слово'
         verbose_name_plural = 'Ключевые слова'
         # db_table
+

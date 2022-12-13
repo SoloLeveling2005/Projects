@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'twitter_app',
+    # 'twitter_app',
+    'todo_app'
 ]
 
 MIDDLEWARE = [
