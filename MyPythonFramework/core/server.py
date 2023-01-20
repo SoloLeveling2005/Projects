@@ -1,6 +1,8 @@
 from http.server import BaseHTTPRequestHandler
 import os
-from settings import FRONTEND_DIR
+
+
+FRONTEND_DIR = os.environ.get('FRONTEND_DIR')
 
 
 
@@ -8,6 +10,7 @@ from settings import FRONTEND_DIR
 class Server(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
+            print(FRONTEND_DIR)
             self.path = FRONTEND_DIR + '/index.html'
         try:
             split_path = os.path.splitext(self.path)
