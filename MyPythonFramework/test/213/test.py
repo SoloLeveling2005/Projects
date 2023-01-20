@@ -10,7 +10,9 @@ class Base_url:
 
     def calc(self):
         while True:
+
             self.files = listdir(self.base_url)
+            self.base_url += "/"
             if self.file_name in self.files:
                 if self.base_url == ".":
                     self.base_url += "/"
@@ -20,11 +22,11 @@ class Base_url:
                 print(self.files)
                 print(self.base_url)
                 time.sleep(1)
-            self.base_url += "./"
+            self.base_url += "../"
 
 
 
 # from settings.test import Base_url
 #
-# base = Base_url()
-# print(base.calc())
+base = Base_url()
+print(base.calc())
