@@ -1,10 +1,26 @@
-from http.server import HTTPServer, CGIHTTPRequestHandler
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import subprocess
+import os
 
-# create a server on port 8000
-server = HTTPServer(('', 8000), CGIHTTPRequestHandler)
 
-# set the PHP interpreter path
-CGIHTTPRequestHandler.cgi_directories = ['/path/to/php']
+class PHPRequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
 
-# start the server
-server.serve_forever()
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        try:
+            # This line specifies the path of the PHP file
+            output = subprocess.check_output(
+                ['php', os.path.join(os.path.dirname(__file__), 'index.php')],
+                cwd=os.path.dirname(__file__)
+            )
+            # print(output.title())
+            self.wfile.write(output)
+        except subprocess.CalledProcessError as e:
+            self.send_error(404, 'File Not Found: %s' % self.path)
+
+
+httpd = HTTPServer(('', 8000), PHPRequestHandler)
+print("Server is running on port 8000")
+httpd.serve_forever()
