@@ -3,8 +3,9 @@ import time
 from http.server import HTTPServer
 from server import Server
 
-HOST_NAME = os.environ.get('HOST_NAME')
+HOST_NAME = str(os.environ.get('HOST_NAME'))
 PORT = int(os.environ.get('PORT'))
+# print(str(os.environ.get('BASE_DIR')))
 
 class color:
     PURPLE = '\033[95m'

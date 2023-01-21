@@ -1,6 +1,6 @@
 import argparse
 import os
-from settings.settings import HOST_NAME, PORT, FRONTEND_DIR
+import settings.settings
 
 
 print('Для остановки приложения нажмите Ctrl+C')
@@ -15,10 +15,7 @@ args, unknown_args = parser.parse_known_args()
 # print(args.code)
 # print(unknown_args[0])
 if args.code == "runserver":
-    os.environ.setdefault('HOST_NAME', str(HOST_NAME))
-    os.environ.setdefault('PORT', str(PORT))
-    os.environ.setdefault('FRONTEND_DIR', str(FRONTEND_DIR))
-    os.system("color 02 & cd core & python main.py")
+    os.system("color 02 & cd basic & python main.py")
 elif args.code == "create-app":
     os.system("color 02 & ")
 

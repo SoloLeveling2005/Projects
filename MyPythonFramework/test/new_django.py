@@ -46,31 +46,42 @@
 # app.serve("/")  # Output: Welcome to the index page.
 # app.serve("/about")  # Output: Learn more about us.
 
-import os
-# from BaseHTTPServer import HTTPServer
-# from SimpleHTTPServer import SimpleHTTPRequestHandler
-from http.server import BaseHTTPRequestHandler, HTTPServer, SimpleHTTPRequestHandler
-ROUTES = [
-    ('/', '/var/www/doc-html')
-]
+# import os
+# # from BaseHTTPServer import HTTPServer
+# # from SimpleHTTPServer import SimpleHTTPRequestHandler
+# from http.server import BaseHTTPRequestHandler, HTTPServer, SimpleHTTPRequestHandler
+# ROUTES = [
+#     ('/', '/var/www/doc-html')
+# ]
+#
+#
+# class MyHandler(SimpleHTTPRequestHandler):
+#     def translate_path(self, path):
+#         # default root -> cwd
+#         root = os.getcwd()
+#
+#         # look up routes and get root directory
+#         for patt, rootDir in ROUTES:
+#             if path.startswith(patt):
+#                 path = path[len(patt):]
+#                 root = rootDir
+#                 break
+#         # new path
+#         return os.path.join(root, path)
+#
+#
+# if __name__ == '__main__':
+#     httpd = HTTPServer(('127.0.0.1', 8000), MyHandler)
+#     print('Starting server, use <Ctrl-C> to stop')
+#     httpd.serve_forever()
 
 
-class MyHandler(SimpleHTTPRequestHandler):
-    def translate_path(self, path):
-        # default root -> cwd
-        root = os.getcwd()
+import inspect
 
-        # look up routes and get root directory
-        for patt, rootDir in ROUTES:
-            if path.startswith(patt):
-                path = path[len(patt):]
-                root = rootDir
-                break
-        # new path
-        return os.path.join(root, path)
+def current_function():
+    print(inspect.stack()[1][3])
 
+def index():
+    current_function()
 
-if __name__ == '__main__':
-    httpd = HTTPServer(('127.0.0.1', 8000), MyHandler)
-    print('Starting server, use <Ctrl-C> to stop')
-    httpd.serve_forever()
+index()

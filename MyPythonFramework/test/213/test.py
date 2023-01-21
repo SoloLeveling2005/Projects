@@ -37,5 +37,7 @@ from os import listdir
 # print(url)
 
 
-os.environ.setdefault('test', "1")
-print(os.environ.get('test'))
+# os.environ.setdefault('test', "1")
+# print(os.environ.get('test'))
+
+print(os.environ)
