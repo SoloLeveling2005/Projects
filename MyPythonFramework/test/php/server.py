@@ -3,9 +3,11 @@ import subprocess
 import os
 
 
+
+
 class PHPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-
+        os.environ["php_path"] = str(self.path)
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
