@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="">Hello</a>
+    {{messages}}
+    {% for room in rooms %}
+
+        {{room.name}}
+
+    {% endfor %}
+    <input type="text" id="chat-message-input">
+    <button id="chat-message-submit">klick</button>
+
+
+<script>
+    let socket = new WebSocket('ws://' + window.location.host + '/ws/' + "1" + '/');
+
+    socket.onopen = function(e) {
+        console.log("[open] Соединение установлено");
+    };
+
+    socket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        console.log(data)
+        // if(data.message){
+        //     let html = '<div class="p-4 bg-gray-200 rounded-xl">';
+        //         html+=  '<p class="font-semibold">' + data.username + '</p>';
+        //         html +=  '<p>' + data.message + '</p></div>';
+        //     document.querySelector('#chat-messages').innerHTML += html;
+        //     scrollToBottom();
+        // } else{
+        // }
+    }
+
+    socket.onclose = function(event) {
+        if (event.wasClean) {
+            alert(`[close] Соединение закрыто чисто, код=${event.code} причина=${event.reason}`);
+        } else {
+            // например, сервер убил процесс или сеть недоступна
+            // обычно в этом случае event.code 1006
+            alert('[close] Соединение прервано');
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e){
+        e.preventDefault()
+        let message = document.querySelector('#chat-message-input').value;
+        socket.send(JSON.stringify({
+            'message': message,
+            'username': "first",
+            'room': "1"
+        }));
+        return false;
+    };
+
+    socket.onerror = function(error) {
+        alert(`[error]`);
+    };
+</script>
+<!--     
+{{room.slug|json_script:"json-roomname" }}
+{{request.user.username|json_script:"json-username"}}
+<script>
+    const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
+    const userName = JSON.parse(document.getElementById('json-username').textContent);
+    const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/' + roomName + '/');
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        if(data.message){
+            let html = '<div class="p-4 bg-gray-200 rounded-xl">';
+                html+=  '<p class="font-semibold">' + data.username + '</p>';
+                html +=  '<p>' + data.message + '</p></div>';
+            document.querySelector('#chat-messages').innerHTML += html;
+            scrollToBottom();
+        } else{
+        }
+    }
+    chatSocket.onclose = function(e) {
+        console.log("Bye!")
+    }
+    document.querySelector('#chat-message-submit').onclick = function(e){
+        e.preventDefault()
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username': userName,
+            'room': roomName
+        }));
+        messageInputDom.value = '';
+        return false;
+    }
+    function scrollToBottom() {
+        const objDiv = document.querySelector('#chat-messages');
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    scrollToBottom(); -->
+</script>
+</body>
+</html>

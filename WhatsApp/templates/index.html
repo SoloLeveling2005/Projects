@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+        }
+        p, h1, h2, h3, h4, h5 {
+            padding: 0;
+            margin: 0;
+        }
+        .left-menu {
+            width: 20vw;
+            height: 100%;
+        }
+        .left-menu .top {
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.09);
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+    
+        .chat {
+            display: flex;
+            /* padding: 0 10px; */
+            margin-bottom: 10px;
+            padding: 7px 10px;
+        }
+        .chat:hover {
+            background-color: rgb(246, 246, 246);
+            cursor: pointer;
+        }
+        .chat .chat-logo {
+            width: 55px;
+            height: 55px;
+            border: 0;
+            border-radius: 90%;
+            background-color: #c4c4c4;
+            margin-right: 10px;
+        }
+        .chat .title {
+            /* margin-bottom: 1px; */
+            font-weight: bold;
+        }
+        .chat .description {
+            pointer-events: none;
+        }
+    
+    
+    
+    
+    
+    
+    
+        .chatroom {
+            background-color: #ebeff2;
+            width: 80vw;
+            height: 100%;
+        }
+    
+        .chatroom .header {
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.09);
+            width: 100%;
+            height: 60px;
+            border-left: 1px solid rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+    
+        .chatroom .send {
+            position:fixed;
+            bottom: 0;
+            padding: 10px;
+            width: 100%;
+            /* background-color: rgb(205, 205, 205); */
+            border-left: 1px solid rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            /* box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2); */
+        }
+    
+        .chatroom .send .new_message {
+            padding: 5px;
+            border-radius: 3px;
+            width: 70%;
+            /* border: 0; */
+        }
+    
+        .chatroom .send .new_message_button {
+            padding: 5px;
+            background: #fff;
+            border-radius: 5px;
+    
+        }
+    
+        .messages {
+            padding: 10px 20px;
+            max-height: 88%;
+            overflow-y: auto;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+            width: max-content;
+            max-width: 30%;
+            margin: 5px;
+            display: inline-block;
+        }
+        .message-someone {
+            width: 100%;
+            display: flex;
+            justify-content: left;
+        }
+    
+        .message-my {
+            width: 100%;
+            display: flex;
+            justify-content: right;
+        }
+    
+        .username-someone {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+    <style>
+        #delete-mess {
+            padding: 5px;
+            cursor: pointer;
+        }
+        #delete-mess:hover {
+            background-color: rgb(235, 235, 235);
+        }
+        .pointer-events {
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Собираем данные с сервера в input-ы -->
+    <input type="hidden" value={{username}} id="username">
+    <input type="hidden" value={{user_id}} id="user_id">
+    
+    <!-- Левое меню -->
+    <section class="left-menu">
+        <div class="top">
+            <h4>Чаты</h4>
+        </div>
+
+        <!-- Выводим все чаты -->
+        <div class="chats">
+            {% for room in rooms %}
+                <div class="chat" id="{{room.slug}}">
+                    <div class="chat-logo"></div>
+                    <div class="descriptions">
+                        <p class="chat-title-chatroom-{{room.slug}}">{{room.name}}</p>
+                        <p class="last-message">Я: Hello</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Окно где выводятся все данные комнаты(чата) -->
+    <section class="chatroom" id="chatroom">
+        <div class="header">
+            <h5 class="title-chatroom">Title</h5>
+        </div>
+        
+        <!-- Вывод всех сообщений -->
+        <div class="messages" id="messages"></div>
+        
+        <!-- Отправка сообщений -->
+        <div class="send">
+            <input type="text" class="new_message" id="chat-message-input" placeholder="Ввыедите текст сообщения">
+            <button class="new_message_button" id="chat-message-submit">Отправить</button>
+        </div>
+    </section>
+
+    <!-- Виджет взаимодействия с сообщениями -->
+    <div id="context-menu" class="dropdown clearfix d-none" style="position: absolute;">
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;text-align: center;">
+        <li style="width: 100%;" class="delete-message" id="delete-mess">Удалить</li>
+      </ul>
+    </div>
+
+    <script>
+        var deleteMessage = (e) => {
+            // Удаляем сообщение на клиенте (оказался не нужен)
+            // var child = document.querySelector(`#${e.target.className}`);
+            // child.remove();
+
+            // Удаляем сообщение на сервере 
+            socket.send(JSON.stringify({
+                'method': 'delete',
+                'id': (e.target.className).split('_')[1]
+            }));
+            
+            // Переопределяем виджеты и спускаемся вниз (на всякий)
+            scroll()
+            contextMenu()
+        }
+        // Функция удаления сообщений
+        buttonDeleteMessage = document.querySelector("#delete-mess")
+        buttonDeleteMessage.onclick = function(e) {
+            deleteMessage(e)
+        }
+
+
+        // Выдаем каждому сообщению возможность открыть виджет
+        let contextMenu = () => {
+            var blocks1 = document.querySelectorAll(".message");
+            for (var i = 0; i < blocks1.length; i++) {
+                // Открытие виджета
+                blocks1[i].addEventListener("contextmenu", (event) => {
+                    // Определяем в какой стороне должен появиться виджет
+                    let window_mess = document.querySelector('#messages')
+                    if (event.clientX >= window_mess.offsetWidth) {
+                        console.log(event.target.id)
+                        document.querySelector("#delete-mess").className = event.target.id
+                        event.preventDefault();
+                        var menu = document.getElementById("context-menu");
+                        menu.classList.add("show");
+                        menu.classList.remove("d-none");
+                        menu.style.left = event.clientX-160 + "px";
+                        menu.style.top = event.clientY + "px";
+                        console.log("open")
+                    } else {
+                        console.log(event.target.id)
+                        document.querySelector("#delete-mess").className = event.target.id
+                        event.preventDefault();
+                        var menu = document.getElementById("context-menu");
+                        menu.classList.add("show");
+                        menu.classList.remove("d-none");
+                        menu.style.left = event.clientX + "px";
+                        menu.style.top = event.clientY + "px";
+                        console.log("open")
+                    }
+                    
+                });
+
+                // Закрытие виджета
+                document.addEventListener("click", (event) => {
+                    var menu = document.getElementById("context-menu");
+                    menu.classList.remove("show");
+                    menu.classList.add("d-none");
+
+                });
+            }
+        }
+
+
+        // Функция для скрола чата вниз
+        let scroll = function () {
+            let element = document.querySelector('#messages')
+            element.scrollTop = element.scrollHeight
+        }
+
+        // Переменная для хранения подключения сокетов
+        var socket;
+
+
+        // Подключем комнату
+        let connect = function (room_id) {
+
+            // Устанавливаем название чата в DOM дерево
+            let titleChatroom = document.querySelector(`.chat-title-chatroom-${room_id}`).textContent
+            document.querySelector('.title-chatroom').textContent = titleChatroom
+
+
+            // Если есть подключение мы его закроем
+            if (socket) {
+                socket.close();
+            }
+
+            // Очищаем чат
+            document.querySelector('#messages').innerHTML = ""
+            
+            // Получение данных о пользователе(который зашел)
+            const username = document.querySelector('#username').value
+            const userID = document.querySelector('#user_id').value
+
+            // Создаем соединение(сокет)
+            socket = new WebSocket('ws://' + window.location.host + '/ws/' + room_id + '/' + username + '/');
+            
+
+            // Реакция на установку подключения сокета
+            socket.onopen = function(e) {
+                console.log("[open] Соединение установлено");
+            };
+        
+
+            // Обрабатываем пришедшее(-ие) сообщение
+            socket.onmessage = function(e) {
+                try{
+                    const data = JSON.parse(JSON.parse(e.data).room_message);
+                    for (let i in data) {
+                        let one_data = data[i].fields
+                        
+                        if(one_data){
+                            if (one_data.user == userID) {
+                                let div = document.createElement('div');
+                                div.className = "message-my";
+                                div.innerHTML = `
+                                <div class="message" id="mess_${data[i].pk}">
+                                    <p class="username-someone pointer-events">${username} </p>
+                                    ${one_data.content} 
+                                </div>
+                                `;
+                                document.querySelector('#messages').append(div);
+                            } else {
+                                let div = document.createElement('div');
+                                div.className = "message-someone";
+                                div.innerHTML = `
+                                <div class="message" id="mess_${data[i].pk}">
+                                    <p class="username-someone pointer-events">${one_data.username} </p>
+                                    ${one_data.content} 
+                                </div>
+                                `;
+                                document.querySelector('#messages').append(div);
+                            }
+                            
+
+                        } else{
+                        }
+                    }
+                    scroll()
+                } catch (err) {
+                    if (document.querySelector(`#mess_${JSON.parse(e.data).id}`)) {
+                        // Удаляем сообщение на клиенте
+                        var child = document.querySelector(`#mess_${JSON.parse(e.data).id}`);
+                        child.remove();
+
+                    } else {
+                        console.log(err)
+                        console.log(JSON.parse(e.data).id)
+                        let mess_data = JSON.parse(e.data)
+                        console.log(mess_data)
+                        console.log("\n\n\n")
+                        if (mess_data.username == username) {
+                            let div = document.createElement('div');
+                            div.className = "message-my";
+                            div.innerHTML = `
+                            <div class="message" id="mess_${mess_data.id}">
+                                <p class="username-someone pointer-events">${username} </p>
+                                ${mess_data.message} 
+                            </div>
+                            `;
+                            document.querySelector('#messages').append(div);
+                        } else {
+                            let div = document.createElement('div');
+                            div.className = "message-someone";
+                            div.innerHTML = `
+                            <div class="message" id="mess_${mess_data.id}">
+                                <p class="username-someone pointer-events">${mess_data.username} </p>
+                                ${mess_data.message} 
+                            </div>
+                            `;
+                            document.querySelector('#messages').append(div);
+                        }
+                    }
+                    
+                }
+                scroll()
+                contextMenu()
+            }
+        
+            // Закрытие подключения сокета
+            socket.onclose = function(event) {
+                if (event.wasClean) {
+                    console.log(`[close] Соединение закрыто чисто, код=${event.code} причина=${event.reason}`);
+                } else {
+                    // например, сервер убил процесс или сеть недоступна
+                    // обычно в этом случае event.code 1006
+                    console.log('[close] Соединение прервано');
+                }
+            };
+        
+
+            // Отправка запроса на добавление сообщения на сервер
+            document.querySelector('#chat-message-submit').onclick = function(e){
+                e.preventDefault()
+                
+                let message = document.querySelector('#chat-message-input').value;
+                console.log(message)
+                socket.send(JSON.stringify({
+                    'method': 'post',
+                    'message': message,
+                    'username': username,
+                    'room': room_id
+                }));
+
+                document.querySelector('#chat-message-input').value = "";
+
+                scroll()
+                contextMenu()
+                return false;
+            };
+        
+
+            // Ошибка сокета
+            socket.onerror = function(error) {
+                alert(`[error]`);
+            };
+            
+
+            // фунция отвечает за реакцию нажатия на Enter(отправка сообщений, без кнопки)
+            var inputEnter = document.getElementById("chat-message-input");
+            inputEnter.addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.getElementById("chat-message-submit").click();
+                }
+            });
+
+
+            // Не знаю зачем эта функция (лучше не буду трогать)
+            rooms = document.querySelectorAll(".chat")
+            for (let room of rooms) {
+                room.onclick = function(e) {
+                    console.log(e.target.id);
+                }
+            }
+        }  
+
+
+        // Функция отечает за открытие нужного чата при нажатии на него в левом меню
+        var blocks = document.querySelectorAll(".chat");
+        for (var i = 0; i < blocks.length; i++) {
+            blocks[i].addEventListener("click", function(event) {
+                connect(event.target.id)
+            });
+        }
+        
+    </script>
+
+    <!-- Подключаем скрипт Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>
