@@ -35,8 +35,10 @@ class Controller:
             return "undefined"
         else:
             # todo Команда не точная
-            return "none"
-
+            if all(self.response_options):
+                return self.response_options[0]
+            else:
+                return "none"
 
     def calc(self, command, message):
         # print("self.commands:", self.commands)
@@ -47,6 +49,6 @@ class Controller:
             # print("\n\n")
             if distance <= 2 or distance <= length_mass:
                 print("command:", text)
-                self.response_options.append(text)
+                self.response_options.append(command)
         # print("завершение потока")
 

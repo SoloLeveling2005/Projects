@@ -11,6 +11,8 @@ class Core:
     # m.author.id == self.message_client.author.id) /// msg.content
 
     def __init__(self):
+        self.request_position = False
+        self.message_text = None
         self.errors = {
             "undefined": "Команда не распознана, скорректируйте запрос.",
             "none": "Команда не точная, скорректируйте запрос"
@@ -47,6 +49,7 @@ class Core:
         :param message: Пришедшее сообщение от пользователя
         :return:
         """
+        self.message_text = message
         method_name = self.controller.calculate(message=message)
         self.controller.response_options = []
         method = getattr(obj, method_name)
@@ -81,12 +84,21 @@ class User(Core):
                 message += f"- {i} \n"
         return message
 
-    def new_goal(self, message):
-        user.new_goal()
+    def new_goal(self):
+        # user.new_goal()
+        self.request_position = True
+        return "give_me_msg"
 
-        # self.message_client.channel.send("Цель добавлена.")
-        self.goals.append(text)
+
+
+    def continue_new_goal(self, message):
+        self.goals.append(message)
+        # self.request_position = False
         return "Цель добавлена."
 
+
     def get_goals(self):
+        message = "**Ваши цели:**"
+        # for i in self.goals:
+
         return self.goals
