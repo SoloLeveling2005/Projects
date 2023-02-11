@@ -48,6 +48,7 @@ class Core:
         :return:
         """
         method_name = self.controller.calculate(message=message)
+        self.controller.response_options = []
         method = getattr(obj, method_name)
         return method()
 
@@ -57,7 +58,6 @@ class Core:
 #         self.users = []
 
 
-
 class User(Core):
     def __init__(self, client):
         super().__init__()
@@ -65,8 +65,11 @@ class User(Core):
         # self.message_client = message
         self.goals = []
 
-    def error(self):
-        pass
+    def none(self):
+        return self.errors['none']
+
+    def undefined(self):
+        return self.errors['undefined']
 
     def help(self):
         print("\033[33m{}\033[37m".format("help command"))

@@ -29,14 +29,14 @@ class Controller:
         print(self.response_options)
         if len(self.response_options) == 1:
             # todo Выполнить
-            pass
+            return self.response_options[0]
         elif len(self.response_options) == 0:
             # todo Такой команды нет
-            pass
+            return "undefined"
         else:
             # todo Команда не точная
-            pass
-        return "help"
+            return "none"
+
 
     def calc(self, command, message):
         # print("self.commands:", self.commands)
