@@ -12,8 +12,7 @@ intents.message_content = True
 
 client = commands.Bot(command_prefix="-", intents=intents)
 
-
-user = User()
+user = User(client,)
 
 
 @client.event
@@ -28,22 +27,22 @@ async def on_message(message):
         return
 
     message_text = message.content
-    if message_text.startswith('new goal'):
-        msg = await client.wait_for('message',
-                                    check=lambda m: m.channel == message.channel and m.author.id == message.author.id)
-        user.new_goal(msg.content)
-        await message.channel.send("Цель добавлена.")
-    elif message_text.startswith('get goals'):
-        goals = user.get_goals()
-        transform_goals = "Ваше цели:\n"
-        if goals:
-            for i in goals:
-                transform_goals += f"*{i}\n"
-        else:
-            transform_goals = "У вас пока нет целей. Добавьте их с помощью new goal"
-        await message.channel.send(transform_goals)
-
-    await message.channel.send("Извини не понял твоего вопроса")
+    request = user.core_controller(obj=user, message=message_text)
+    print(request)
+    # if message_text.startswith('new goal'):
+    #     msg = await client.wait_for('message',
+    #                                 check=lambda m: m.channel == message.channel and m.author.id == message.author.id)
+    #     user.new_goal(msg.content)
+    #     await message.channel.send("Цель добавлена.")
+    # elif message_text.startswith('get goals'):
+    #     goals = user.get_goals()
+    #     transform_goals = "Ваше цели:\n"
+    #     if goals:
+    #         for i in goals:
+    #             transform_goals += f"*{i}\n"
+    #     else:
+    #         transform_goals = "У вас пока нет целей. Добавьте их с помощью new goal"
+    await message.channel.send(request)
 
 
 client.run(TOKEN)
