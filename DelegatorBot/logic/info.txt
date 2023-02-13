@@ -1,0 +1,30 @@
+env1\bin\python -m pip freeze > requirements.txt
+env2\bin\python -m pip install -r requirements.txt
+
+
+
+
+
+
+
+
+
+
+
+# todo узнать какие устройства есть на компьютере
+# voices = tts.getProperty('voices')
+#
+# # Перебрать голоса и вывести параметры каждого
+#
+# for voice in voices:
+#     print('=======')
+#
+#     print('Имя: %s' % voice.name)
+#
+#     print('ID: %s' % voice.id)
+#
+#     print('Язык(и): %s' % voice.languages)
+#
+#     print('Пол: %s' % voice.gender)
+#
+#     print('Возраст: %s' % voice.age)
