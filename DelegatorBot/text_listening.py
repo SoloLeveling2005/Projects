@@ -1,14 +1,13 @@
 import json
 import os
-
 import pyaudio
 from vosk import Model, KaldiRecognizer
-print(os.environ)
-BASE_DIR = os.environ['BASE_DIR']
-print(BASE_DIR)
-model = Model('vosk-model-small-ru-0.4')
-rec = KaldiRecognizer(model, 16000)
+import get_base_dir
 
+
+BASE_DIR = get_base_dir.get()
+model = Model(f'{BASE_DIR}\\vosk-model-small-ru-0.4')
+rec = KaldiRecognizer(model, 16000)
 p = pyaudio.PyAudio()
 stream = p.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8000)
 stream.start_stream()
