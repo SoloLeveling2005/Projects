@@ -10,21 +10,22 @@ def talk(message, lang):
     параметр) если нет
     """
     try:
-        tts = pyttsx3.init()
-        newVoiceRate = 195
-        tts.setProperty('rate', newVoiceRate)
+        engine = pyttsx3.init()
+        engine.setProperty('volume', 3)
+        engine.setProperty('rate', 200)
+
         VOISE_ID = {
             "ru": "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_RU-RU_IRINA_11.0",
             "en": "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0"
         }
-        print(VOISE_ID[lang])
-        tts.setProperty('voice', VOISE_ID[lang])
-        tts.say(message)
-        tts.runAndWait()
+        # print(VOISE_ID[lang])
+        engine.setProperty('voice', VOISE_ID[lang])
+        engine.say(message)
+        engine.runAndWait()
         return True
     except Exception as e:
         return False, e
 
 
-e = talk("Привет. Как думаешь? Сколько будет, 1+1", "en")
+e = talk("Привет. Как думаешь? Сколько будет, 1+1", "ru")
 print(e)
