@@ -52,7 +52,7 @@ class Assistant(Core):
             self.data_listen += text.strip() + " "
             # print(text)
             # print(self.data_listen)
-            if self.check(self.data_listen.lower()):
+            if self.coincidence(self.data_listen.lower()):
                 self.data_listen = ""
 
 
