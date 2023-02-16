@@ -18,7 +18,7 @@ class Core:
         for token in self.tokens:
             for command in self.built_in_command:
                 # todo, учитываем длину, количество слов. Если символов 7 то макс погрешность 3
-                
+
                 nltk.edit_distance(command.lower())
                 # if command.lower() in self.tokens:
                 #     new_window_message(self.built_in_command[command])
