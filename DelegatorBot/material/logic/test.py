@@ -33,23 +33,26 @@
 # root.mainloop()
 
 
-from plyer import notification
+# from plyer import notification
+#
+# notification.notify(
+#     title='Уведомление',
+#     message='Delegator запущен',
+#     app_name='Мое приложение',
+#     # app_icon='./logo.ico',
+#     timeout=3,
+#     ticker='Новое уведомление',
+#     toast=True,
+#     # sound='./sound.wav',
+#     # urgency='normal',
+#     # Дополнительные параметры для Windows:
+#     # выпадающая панель в стиле Windows 10
+#     # win10_features=True,
+#     # Цвет фона уведомления
+#     # app_color=(255, 255, 255),
+#     # Шрифт текста уведомления
+#     # font='Arial',
+# )
 
-notification.notify(
-    title='Уведомление',
-    message='Delegator запущен',
-    app_name='Мое приложение',
-    # app_icon='./logo.ico',
-    timeout=3,
-    ticker='Новое уведомление',
-    toast=True,
-    # sound='./sound.wav',
-    # urgency='normal',
-    # Дополнительные параметры для Windows:
-    # выпадающая панель в стиле Windows 10
-    # win10_features=True,
-    # Цвет фона уведомления
-    # app_color=(255, 255, 255),
-    # Шрифт текста уведомления
-    # font='Arial',
-)
+
+
