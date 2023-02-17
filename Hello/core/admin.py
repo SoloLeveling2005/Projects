@@ -4,7 +4,7 @@ from core import models
 
 
 
-class Users(admin.ModelAdmin):
+class User(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'Todo' на панели администратора
     """
@@ -67,4 +67,4 @@ class Users(admin.ModelAdmin):
     ]
 
 
-admin.site.register(models.Users, Users)
+admin.site.register(models.User, User)
