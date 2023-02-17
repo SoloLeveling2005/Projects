@@ -13,11 +13,11 @@ function App() {
       </header>
         <section className='sites'>
             <div className="site">
-                <a href="" className="url">
+                <a href="http://127.0.0.1:8001/" className="url">
                     https://www.Site1.com
                 </a>
                 <br/>
-                <a href="" className="title">
+                <a href="http://127.0.0.1:8001/" className="title">
                     Site1
                 </a>
                 <br/>
