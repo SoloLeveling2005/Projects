@@ -1,0 +1,22 @@
+.site {
+    max-width: 600px;
+}
+
+.site-title__link {
+    font-size: 30px;
+    cursor: pointer;
+    color: #3d71b1;
+}
+
+.site-ip {
+    color: #6b6d70;
+    cursor: pointer;
+}
+
+.site-ip:hover {
+    text-decoration: underline;
+}
+
+.site-description {
+    color: #ffffffce;
+}

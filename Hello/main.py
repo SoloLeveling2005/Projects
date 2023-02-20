@@ -117,10 +117,9 @@ class BrowserWindow(QWidget):
         screenRect = desktop.screenGeometry()
         width = screenRect.width()
         height = screenRect.height()
-
         print(self.width())
         self.setGeometry(0, 0, width, height)
-        self.setStyleSheet("background-color:white;")
+        # self.setStyleSheet("background-color:white;")
 
         self.setWindowTitle("Hello world")
 
@@ -140,6 +139,7 @@ class BrowserWindow(QWidget):
 
 if __name__ == '__main__':
     app = QApplication([])
+    app.setStyle("Fusion")
     url = "http://localhost:3000/"
     browser = BrowserWindow(url)
     browser.show()
