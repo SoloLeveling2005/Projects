@@ -113,7 +113,6 @@ class BrowserWindow(QWidget):
     def __init__(self, url):
         super().__init__()
         self.url = url
-
         desktop = QDesktopWidget()
         screenRect = desktop.screenGeometry()
         width = screenRect.width()
@@ -121,13 +120,15 @@ class BrowserWindow(QWidget):
 
         print(self.width())
         self.setGeometry(0, 0, width, height)
+        self.setStyleSheet("background-color:white;")
 
         self.setWindowTitle("Hello world")
+
         self.web_view = QWebEngineView(self)
         self.page = QWebEnginePage()
         self.web_view.setPage(self.page)
         self.web_view.load(QUrl(self.url))
-
+        self.web_view.setZoomFactor(1.5)
         layout = QVBoxLayout(self)
 
         layout.addWidget(self.web_view)
