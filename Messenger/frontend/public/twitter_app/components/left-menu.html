@@ -1,0 +1,84 @@
+{% load static %}
+<section class="left-menu">
+    <div class="menu-elem-icon">
+        <div class="menu-elem-active-icon">
+            <img src="{% static 'img/home/icon.png' %}" alt="">
+        </div>
+    </div>
+    <div class="menu-elem">
+        <div class="menu-elem-active active-page">
+            <a href="{% url 'twitter_app:home'%}">
+                <img src="{% static 'img/home/home.png' %}" alt="">
+                <span>Home</span>
+            </a>
+        </div>
+    </div>
+    <div class="menu-elem">
+        <div class="menu-elem-active">
+            <a href="{% url 'twitter_app:explore'%}">
+                <img src="{% static 'img/home/explore.png' %}" alt="">
+                <span>Explore</span>
+            </a>
+        </div>
+    </div>
+    <div class="menu-elem">
+        <div class="menu-elem-active">
+            <a href="">
+                <img src="{% static 'img/home/notification.png' %}" alt="">
+                <span>Notifications</span>
+            </a>
+        </div>
+    </div>
+    <div class="menu-elem">
+        <div class="menu-elem-active">
+            <a href="">
+                <img src="{% static 'img/home/messages.png' %}" alt="">
+                <span>Messages</span>
+            </a>
+        </div>
+    </div>
+    <div class="menu-elem">
+        <div class="menu-elem-active">
+            <a href="">
+                <img src="{% static 'img/home/bookmark.png' %}" alt="">
+                <span>Bookmark</span>
+            </a>
+        </div>
+    </div>
+    <div class="menu-elem">
+        <div class="menu-elem-active">
+            <a href="">
+                <img src="{% static 'img/home/list.png' %}" alt="">
+                <span>Lists</span>
+            </a>
+        </div>
+    </div>
+    <div class="menu-elem">
+        <div class="menu-elem-active">
+            <a href="">
+                <img src="{% static 'img/home/profile.png' %}" alt="">
+                <span>Profile</span>
+            </a>
+        </div>
+    </div>
+    <div class="menu-elem">
+        <div class="menu-elem-active">
+            <a href="">
+                <img src="{% static 'img/home/more.png' %}" alt="">
+                <span>More</span>
+            </a>
+        </div>
+    </div>
+
+    <button class="menu_new_tweet">Tweet</button>
+    <div class="profile-bottom-in-menu" style=""></div>
+</section>
+
+<style>
+.menu-elem-active a {
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+}
+</style>

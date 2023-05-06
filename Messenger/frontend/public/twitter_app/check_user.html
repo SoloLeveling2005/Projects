@@ -1,0 +1,114 @@
+{% extends 'public/twitter_app/components/base.html' %}
+{% load static %}
+{% block main %}
+    <main>
+        {% include 'public/twitter_app/components/left-menu.html' %}
+        {% include 'public/twitter_app/components/top-menu.html' %}
+
+        <section class="main check_user_page">
+            {% include 'public/twitter_app/components/profile.html' %}
+            <div class="tweets">
+                {% for tweet in tweets %}
+                    <div class="tweet">
+                            <div class="logo">{{tweet.author_nickname.0}}</div>
+                            <div id="tweet-content" class="tweet-content">
+                                <div class="tweet-actions-top">
+                                    <a href="{% url 'twitter_app:check_user' tweet.author_id %}" class="tweet-author-nickname">{{tweet.author_nickname}}</a>
+                                    {% if tweet.author_id|add:"0" == user_id|add:"0" %} {# Добавил строку к данным чтобы они стали одинаковым типом (использовать с осторожностью) #}
+                                        <a href="{% url 'twitter_app:delete_tweet' user_id tweet.id %}"><img src="{% static 'src/twitter_app/assets/img/home/close.png' %}" alt="" class="close-tweet"></a>
+                                    {% endif %}
+                                </div>
+                                <p class="tweet-text">{{tweet.text_tweet}}</p>
+                                <div class="tweet-actions-bottom">
+                                    {% if tweet.id in mass_likes_user %}
+                                        <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_id parent_id_tweet=00 parent_user_id=00%}"><img src="{% static 'src/twitter_app/assets/img/home/like_on.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                    {% elif tweet.id %}
+                                        <a href="{% url 'twitter_app:like_tweet' id_tweet=tweet.id  user_id=user_id parent_id_tweet=00 parent_user_id=00%}"><img src="{% static 'src/twitter_app/assets/img/home/like_off.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                    {% endif %}
+                                        <a style="margin-left: 20px;" href="{% url 'twitter_app:check_tweet' user_id=user_id  id_tweet=tweet.id %}"><img src="{% static 'src/twitter_app/assets/img/home/comment.png' %}" alt=""></a>
+                                    <span class="tweet-likes">
+                                        {{tweet.comments}}
+
+                                    </span>
+                                </div>
+                            </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+    <script>
+        document.querySelector(".top-menu").innerHTML = `
+        <a href="{% url 'twitter_app:home' user_data.id %}" class="back_home"><img src="{% static 'src/twitter_app/assets/img/check_tweet/back.png' %}" alt=""></a>
+        <span>{{user_data.user_nickname}}</span>
+        `
+    </script>
+    <style>
+        .main {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .back_home {
+            padding: 7px;
+            width: 17px;
+            height: 17px;
+            border: 0;
+            border-radius: 90%;
+            display: flex;
+            margin-right: 40px;
+            transition: background .3s;
+        }
+        .back_home:hover {
+            background: rgb(199, 199, 199);
+        }
+        .back_home img {
+            width: 17px;
+            height: 17px;
+        }
+
+
+
+
+
+        .tweets {
+            width: calc(100% + 40px);
+            height: auto;
+            border-top: 1px solid #adadad;
+            margin-left: -20px;
+            margin-top: 5px;
+        }
+
+        .tweets .tweet {
+            /*width: 100%;*/
+            height: auto;
+            /* border-top: 1px solid rgba(0, 0, 0, 0.100); */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.100);
+            padding: 15px 19px;
+            background: white;
+            -moz-transition: background .4s;
+            -webkit-transition: background .4s;
+            -o-transition: background .4s;
+            -ms-transition: background .4s;
+            transition: background .4s;
+        }
+
+        .tweets .tweet:hover {
+            background: #f8f8f8;
+        }
+
+        .tweets .tweet-content {
+            width: 100%;
+        }
+
+
+
+        .tweets .tweet-content img {
+            width: 15px;
+            height: 15px;
+
+        }
+
+    </style>
+
+
+{% endblock %}

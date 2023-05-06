@@ -1,0 +1,285 @@
+{% extends 'public/twitter_app/components/base.html' %}
+{% load static %}
+{% block main %}
+    <main class="home-page">
+        {% include 'public/twitter_app/components/left-menu.html' %}
+{#        {% include 'public/twitter_app/components/top-menu.html' %}#}
+        <section class="main">
+            <div class="top-menu">
+                <span>Home</span>
+{#                <div class="hr"></div>#}
+            </div>
+            <div class="parent-tweet">
+                <div class="top-element">
+                    <div class="profile">{{ this_tweet.user_name.0 }}</div>
+                    <div class="title" style="display: flex;">{{ this_tweet.author_nickname }}</div>
+                    <div class="action-button"><img style="width: 15px;height: 15px;" src="{% static 'img/home/more_2.png' %}" alt=""></div>
+                </div>
+                <div class="content">{{ this_tweet.tweet_text }}</div>
+                <div class="action-button">
+                    <div class="div"><img src="" alt=""></div>
+                </div>
+                <div class="new_tweet">
+                    <div class="profile" style="display: flex;">{{user_data.user_name.0}}</div>
+                    <form action="{% url 'twitter_app:new_tweet' %}" method="POST" class="new_tweet_in_content_block">
+                        {% csrf_token %}
+                        <input type="hidden" name="csrfmiddlewaretoken" value="pU3kc9QnWzu34cFpEwz5HpXnTuKGHFA8DjFLMvXFdO3hFu7fz9hUqFLot2iVjSiK">
+                        <textarea class="tweet_text" name="tweet_text" id="" maxlength="200" contenteditable="true" placeholder="Whats happaning?"></textarea>
+                        <input type="hidden" value="{{ user_data.id }}" name="author_id">
+                        <input type="hidden" value="{{ parent_tweet_id }}" name="parent_tweet_id">
+                        <input type="submit" value="Tweet" onclick="">
+                    </form>
+                </div>
+                <div class="tweets">
+                    {% for tweet in tweets %}
+                        <div class="tweet">
+                                <div class="logo">{{user_data.user_nickname.0}}</div>
+                                <div id="tweet-content" class="tweet-content">
+                                    <div class="tweet-actions-top">
+                                        <a href="" class="tweet-author-nickname">{{tweet.author_nickname}}</a>
+                                        {% if tweet.author_id|add:"0" == user_id|add:"0" %} {# Добавил строку к данным чтобы они стали одинаковым типом (использовать с осторожностью) #}
+                                            <a href="{% url 'twitter_app:delete_tweet' tweet.id %}"><img src="{% static 'img/home/close.png' %}" alt="" class="close-tweet"></a>
+                                        {% endif %}
+                                    </div>
+                                    <p class="tweet-text">{{tweet.tweet_text}}</p>
+                                    <div class="tweet-actions-bottom">
+                                        {% if tweet.id in mass_likes_user %}
+                                            <a href="{% url 'twitter_app:like_tweet' tweet_id=tweet.id%}"><img src="{% static 'img/home/like_on.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                        {% elif tweet.id %}
+                                            <a href="{% url 'twitter_app:like_tweet' tweet_id=tweet.id%}"><img src="{% static 'img/home/like_off.png' %}" alt=""></a><span class="tweet-likes" >{{tweet.likes}}</span>
+                                        {% endif %}
+                                            <a style="margin-left: 20px;" href="{% url 'twitter_app:status_tweet' nickname=user_data.user_nickname  tweet_id=tweet.id %}"><img src="{% static 'img/home/comment.png' %}" alt=""></a>
+                                        <span class="tweet-likes">
+                                            {% if tweet.parent_tweet_id %}
+                                                {{tweet.comments}}
+                                            {% elif tweet %}
+                                                0
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="right-menu">
+            12334
+        </section>
+    </main>
+    <script>
+        document.querySelector(".top-menu").innerHTML = `
+        <a href="{% url 'twitter_app:home' %}" class="back_home"><img src="{% static 'img/check_tweet/back.png' %}" alt=""></a>
+        Tweet
+        `
+    </script>
+    <style>
+        main {
+            width: 80%;
+        }
+        .main {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .top-menu {
+            display: flex;
+            align-items: center;
+        }
+        .main .top-menu {
+            padding-left: 0;
+        }
+        .back_home {
+            padding: 7px;
+            width: 17px;
+            height: 17px;
+            border: 0;
+            border-radius: 90%;
+            display: flex;
+            margin-right: 40px;
+            transition: background .3s;
+        }
+        .back_home:hover {
+            background: rgb(199, 199, 199);
+        }
+        .back_home img {
+            width: 17px;
+            height: 17px;
+        }
+
+        .parent-tweet .content {
+            margin-top: 18px;
+            font-size: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.100);
+            padding-bottom: 10px;
+            width: 100%;
+        }
+        .top-element{
+            display: flex;
+            align-items: flex-start;
+            margin-top: 14px;
+        }
+        .top-element .title {
+            margin-top:5px;
+            margin-left: 7px;
+            font-weight: 500;
+        }
+        .top-element .profile {
+            width: 55px;
+            height: 55px;
+            font-size: 24px;
+            color: white;
+            background-color: #455a64;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 90px;
+        }
+        .top-element .profile:hover {
+            -webkit-filter: brightness(70%);
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            transition: all .5s ease;
+            cursor: pointer;
+
+        }
+
+        .top-element .action-button {
+            margin-left: auto;
+            padding: 8px;
+            display: flex;
+            border: 0;
+            border-radius: 90%;
+
+        }
+        .top-element .action-button:hover {
+            transition: all .5s ease;
+            cursor: pointer;
+            background-color: #e0e0e0;
+        }
+
+
+
+
+
+    /*
+    */
+
+
+        .parent-tweet .new_tweet {
+            display: flex;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.100);
+            padding-bottom: 10px;
+            padding: 15px 19px;
+            /*width: 100%;*/
+        }
+        .main .new_tweet {
+            padding: 0;
+            padding-bottom: 15px;
+        }
+        .parent-tweet .new_tweet .profile {
+            width: 55px;
+            height: 50px;
+            font-size: 24px;
+            color: white;
+            background-color: #455a64;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 90px;
+        }
+        .parent-tweet .new_tweet .profile:hover {
+            -webkit-filter: brightness(70%);
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            transition: all .5s ease;
+            cursor: pointer;
+
+        }
+        .parent-tweet .new_tweet textarea{
+            font-size: 18px;
+            padding: 20px;
+            font-size: 20px;
+            resize: none;
+            width: calc(100% - 80px);
+            height: min-content;
+            display: inline-table;
+            border: 0;
+            outline:none;
+
+        }
+        .parent-tweet .new_tweet form {
+            width: 100%;
+        }
+        .parent-tweet .new_tweet form input {
+            padding: 10px 20px;
+            font-size: 15px;
+            background-color: rgb(29, 155, 240);
+            color: white;
+            /* opacity: .5; */
+            float: right;
+            border:0;
+            border-radius: 90px;
+            margin-top: 10px;
+        }
+
+        .parent-tweet .new_tweet form input:hover {
+            -webkit-filter: brightness(90%);
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            transition: all .5s ease;
+        }
+
+
+
+
+    /*    */
+
+
+        .tweets {
+            width: 100%;
+            height: auto;
+
+
+        }
+
+        .tweets .tweet {
+            /*width: 100%;*/
+            height: auto;
+            /* border-top: 1px solid rgba(0, 0, 0, 0.100); */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.100);
+            padding: 15px 19px;
+            background: white;
+            -moz-transition: background .4s;
+            -webkit-transition: background .4s;
+            -o-transition: background .4s;
+            -ms-transition: background .4s;
+            transition: background .4s;
+        }
+
+        .tweets .tweet:hover {
+            background: #f8f8f8;
+        }
+
+        .tweets .tweet-content {
+            width: 100%;
+        }
+
+
+
+        .tweets .tweet-content img {
+            width: 15px;
+            height: 15px;
+
+        }
+    </style>
+
+
+{% endblock %}

@@ -1,0 +1,180 @@
+{% load static %}
+{% load split_long_results %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="datas_table">
+        <div class="tr">
+            <p class="td title">наименование</p>
+            <p class="td title">количество</p>
+            <p class="td title">себестоимость</p>
+            <p class="td title">% накрутка</p>
+            <p class="td title">итоговая стоимость</p>
+            <p class="td title">стоимость НДС</p>
+            <p class="td title">итоговая</p>
+            <p class="td title td-calc">расчитать</p>
+            <p class="td title td-save">сохранить</p>
+            
+        </div>
+        {% for data in datas%}
+        <form action="{% url 'django_app:index' %}" method="POST" class="main-form">
+            {% csrf_token %}
+            <div class="tr">
+                <p class="td">
+                    <input id="name{{data.id}}" type="text" name="name" value="{{data.name}}" class="name">
+                </p>
+                <p class="td">
+                    <input id="quantity{{data.id}}" type="text" name="quantity" value="{% split_str var=data.quantity %}" class="quantity">
+                </p>
+                <p class="td">
+                    <input id="cost_without_cheat{{data.id}}" type="text" name="cost_without_cheat" value="{% split_str var=data.cost_without_cheat %}" class="cost_without_cheat">
+                </p>
+                <p class="td">
+                    <input id="cheat{{data.id}}" type="text" name="cheat" value="{% split_str var=data.cheat %}" class="cheat">
+                </p>
+                <p class="td result">
+                    <input disabled id="total_cost{{data.id}}" type="text" name="total_cost" value="{% split_str var=data.total_cost %}" class="total_cost">
+                </p>
+                <p class="td result">
+                    <input disabled id="cost_with_VAT{{data.id}}" type="text" name="cost_with_VAT" value="{% split_str var=data.cost_with_VAT %}" class="cost_with_VAT">
+                </p>
+                <p class="td result">
+                    <input disabled id="total{{data.id}}" type="text" name="total" value="{% split_str var=data.total %}" class="total">
+                </p>
+                <input type="hidden" value="{{data.id}}" name="id">
+                <p class="td td-calc-block" id="{{data.id}}" onClick="calc(this.id)">
+                    <img src="{% static 'img/calc.png' %}" alt="" class="calc">
+                </p>
+                <p class="td td-save-block">
+                    <input type="submit" style="background: url({% static 'img/save.png' %}) no-repeat; background-size: 26%; background-position: center center;" value="">
+                </p>
+                
+            </div>
+            
+        </form>
+        {% endfor %}
+        
+    </div>
+    <div class="new_data" id="new_data">Создать+</div>
+    <a href="{% static 'exel/form.xlsx' %}" download="form" class="download_exel_form">Получить форму для редактирования каталога</a>
+    <form action="{% url 'django_app:index' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file"
+               title="Upload excel file"
+               name="excel_file"
+               style="border: 1px solid black; padding: 5px;"
+               required="required">
+        
+        <input type="submit"
+               value="Upload"
+               style="">
+    </form>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // new data
+        document.querySelector('#new_data').addEventListener("click", function() {
+            console.log("new")
+            let code = Date.now()
+            document.querySelector('.datas_table').innerHTML+=`
+            <form action="{% url 'django_app:index' %}" method="POST">
+                {% csrf_token %}
+                <div class="tr">
+                    <p class="td">
+                        <input type="text" id="name${code}" name="name" value="" class="name">
+                    </p>
+                    <p class="td">
+                        <input type="text" id="quantity${code}" name="quantity" value="" class="quantity">
+                    </p>
+                    <p class="td">
+                        <input type="text" id="cost_without_cheat${code}" name="cost_without_cheat" value="" class="cost_without_cheat">
+                    </p>
+                    <p class="td">
+                        <input type="text" id="cheat${code}" name="cheat" value="" class="cheat">
+                    </p>
+                    <p class="td result">
+                        <input disabled type="text" id="total_cost${code}" name="total_cost" value="" class="total_cost">
+                    </p>
+                    <p class="td result">
+                        <input disabled type="text" id="cost_with_VAT${code}" name="cost_with_VAT" value="" class="cost_with_VAT">
+                    </p>
+                    <p class="td result">
+                        <input disabled type="text" id="total${code}" name="total" value="" class="total">
+                    </p>
+                    <input type="hidden" value="${code}" name="id">
+                    <p class="td td-calc-block" id="${code}" onClick="calc(this.id)">
+                        <img src="{% static 'img/calc.png' %}" alt="" class="calc">
+                    </p>
+                    <p class="td td-save-block">
+                        
+                        <input type="submit" style="background: url({% static 'img/save.png' %}) no-repeat; background-size: 26%; background-position: center center;" value="">
+                    </p>
+                    
+                </div>
+            </form>
+            `;
+            document.querySelector('#new_data').style="display:none;"
+        });
+
+        // calc
+        function calc(code) {
+            console.log(code)
+            let name = document.querySelector(`#name${code}`).value.replace(/\s/g, "");
+            let quantity = document.querySelector(`#quantity${code}`).value.replace(/\s/g, "");
+            let cost_without_cheat = document.querySelector(`#cost_without_cheat${code}`).value.replace(/\s/g, "");
+            let cheat = document.querySelector(`#cheat${code}`).value.replace(/\s/g, "");
+            let total_cost = document.querySelector(`#total_cost${code}`).value.replace(/\s/g, "");
+            let cost_with_VAT = document.querySelector(`#cost_with_VAT${code}`).value.replace(/\s/g, "");
+            let total = document.querySelector(`#total${code}`).value.replace(/\s/g, "");
+            
+            let empty = false
+            let NDS = 12
+            if (quantity == '') {
+                empty = true;
+                document.querySelector(`#quantity${code}`).style = "background-color:red;"
+            }
+            if (cost_without_cheat == '') {
+                empty = true;
+                document.querySelector(`#cost_without_cheat${code}`).style = "background-color:red;"
+            }
+            if (cheat == '') {
+                empty = true;
+                document.querySelector(`#cheat${code}`).style = "background-color:red;"
+            }
+            setTimeout(function() {
+                document.querySelector(`#quantity${code}`).style = "background-color:white;"
+                document.querySelector(`#cost_without_cheat${code}`).style = "background-color:white;"
+                document.querySelector(`#cheat${code}`).style = "background-color:white;"
+            }, 700)
+            if (empty == false) {
+                let money = +quantity * (+cost_without_cheat + Number(+cost_without_cheat/100)*cheat)
+                let money_with_nds = money * NDS / 100
+
+                document.querySelector(`#total_cost${code}`).value = String(money).split( /(?=(?:...)*$)/ ).join(" ")
+                document.querySelector(`#cost_with_VAT${code}`).value = String(money_with_nds).split( /(?=(?:...)*$)/ ).join(" ")
+                document.querySelector(`#total${code}`).value = String(money + money_with_nds).split( /(?=(?:...)*$)/ ).join(" ")
+            }
+        }
+            
+    </script>
+</body>
+</html>
