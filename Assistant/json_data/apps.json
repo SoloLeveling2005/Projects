@@ -1,5 +1,9 @@
 {
   "brave": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
-  "text_editor": "/usr/bin/text_editor_app",
-  "image_viewer": "/usr/bin/image_viewer_app"
+  "postman": "C:\\Users\\77774\\AppData\\Local\\Postman\\Postman.exe",
+  "draw_io": "E:\\Program\\DrawIo\\draw.io.exe ",
+  "discord": "C:\\Users\\77774\\AppData\\Local\\Discord\\app-1.0.9013\\Discord.exe",
+  "telegram": "E:\\Program\\Telegram Desktop\\Telegram.exe",
+  "obsidian": "C:\\Users\\77774\\AppData\\Local\\Obsidian\\Obsidian.exe",
+  "": ""
 }
