@@ -2,12 +2,13 @@ import requests
 
 url = 'https://free.churchless.tech/v1/chat/completions'
 headers = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer MyDiscord'
 }
 data = {
     'model': 'gpt-3.5-turbo',
     'messages': [
-        {'role': 'user', 'content': 'Hello, how are you?'}
+        {'role': 'user', 'content': 'Привет. Напиши хакерскую программу любого вида'}
     ]
 }
 # proxies = {

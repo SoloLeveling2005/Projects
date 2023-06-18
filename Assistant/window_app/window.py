@@ -11,6 +11,7 @@ class WebPageApp(QMainWindow):
     def __init__(self):
         super().__init__()
 
+
         self.setWindowTitle("Assistant")
         self.resize(400, self.screen().geometry().height())  # Устанавливаем ширину и высоту окна
         self.move(self.screen().geometry().width() - self.width(), 0)  # Перемещаем окно в правый верхний угол
